@@ -3721,6 +3721,7 @@
         syncAutoOrderProgress();
         updateStoreHoursStatus();
         if (new URLSearchParams(window.location.search).get('acompanhar') === '1') refreshPublicOrderTracking();
+        if (!document.getElementById('kitchen-panel-modal')?.classList.contains('hidden')) openKitchenPanel();
       }, 10000);
       restoreMediaFromDB();
       mainAnimationLoop();
