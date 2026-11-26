@@ -3005,7 +3005,14 @@
         renderOrderTrackerUI();
         document.getElementById('order-tracker-modal')?.classList.remove('hidden');
       };
-      document.getElementById('btn-open-tracker')?.addEventListener('click', openTrackerModal);
+      document.getElementById('btn-open-tracker')?.addEventListener('click', () => {
+        const trackerModal = document.getElementById('order-tracker-modal');
+        if (trackerModal?.classList.contains('hidden')) {
+          openTrackerModal();
+        } else {
+          trackerModal?.classList.add('hidden');
+        }
+      });
       document.getElementById('btn-banner-details')?.addEventListener('click', openTrackerModal);
       document.getElementById('btn-close-tracker')?.addEventListener('click', () => {
         document.getElementById('order-tracker-modal')?.classList.add('hidden');
