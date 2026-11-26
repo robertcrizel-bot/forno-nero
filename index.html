@@ -127,8 +127,14 @@
     /* Palco 360° / Vídeo */
     #stage-360-box {
       cursor: grab;
-      touch-action: pan-y;
+      touch-action: none;
       user-select: none;
+    }
+    #active-flavor-video {
+      transform: scale(var(--video-zoom, 1));
+      transform-origin: center center;
+      transition: transform 80ms linear;
+      will-change: transform;
     }
     #stage-360-box:active {
       cursor: grabbing;
@@ -582,7 +588,7 @@
 
           <div id="stage-360-box" class="relative w-full h-[270px] sm:h-[340px] my-3 rounded-2xl bg-forno/90 border border-stone-800/80 overflow-hidden flex items-center justify-center">
             <div id="stage-360-content" class="w-full h-full flex items-center justify-center">
-          <video id="active-flavor-video" src="blob:null/236532e2-baeb-4681-969f-1a9cac796a0a" autoplay="" loop="" muted="" playsinline="" class="w-full h-full object-contain pointer-events-none select-none"></video>
+          <video id="active-flavor-video" src="blob:null/236532e2-baeb-4681-969f-1a9cac796a0a" autoplay="" loop="" muted="" playsinline="" class="w-full h-full object-contain select-none"></video>
         </div>
           </div>
 
@@ -1746,7 +1752,7 @@
             loop
             muted
             playsinline
-            class="w-full h-full object-contain pointer-events-none select-none"
+            class="w-full h-full object-contain select-none"
           ></video>
         `;
         const vid = document.getElementById('active-flavor-video');
@@ -1823,6 +1829,18 @@
       if (!box) return;
       let dragging = false;
       let lastX = 0;
+      let zoom = 1;
+      let pinchStartDistance = 0;
+      let pinchStartZoom = 1;
+      const applyZoom = () => {
+        const vid = document.getElementById('active-flavor-video');
+        if (vid) vid.style.setProperty('--video-zoom', zoom.toFixed(2));
+      };
+      const distance = (touches) => {
+        const dx = touches[0].clientX - touches[1].clientX;
+        const dy = touches[0].clientY - touches[1].clientY;
+        return Math.hypot(dx, dy);
+      };
 
       const onDown = (x) => {
         dragging = true;
@@ -1860,12 +1878,39 @@
       window.addEventListener('mousemove', (e) => onMove(e.clientX));
       window.addEventListener('mouseup', onUp);
       box.addEventListener('touchstart', (e) => {
+        if (e.touches.length >= 2) {
+          dragging = false;
+          pinchStartDistance = distance(e.touches);
+          pinchStartZoom = zoom;
+          return;
+        }
         if (e.touches[0]) onDown(e.touches[0].clientX);
       }, { passive: true });
       box.addEventListener('touchmove', (e) => {
+        if (e.touches.length >= 2) {
+          e.preventDefault();
+          if (pinchStartDistance > 0) {
+            zoom = Math.min(3, Math.max(1, pinchStartZoom * distance(e.touches) / pinchStartDistance));
+            applyZoom();
+          }
+          return;
+        }
         if (e.touches[0]) onMove(e.touches[0].clientX);
-      }, { passive: true });
-      box.addEventListener('touchend', onUp);
+      }, { passive: false });
+      box.addEventListener('touchend', (e) => {
+        if (e.touches.length < 2) pinchStartDistance = 0;
+        if (e.touches.length === 0) onUp();
+      });
+      box.addEventListener('wheel', (e) => {
+        if (!e.ctrlKey && !e.metaKey) return;
+        e.preventDefault();
+        zoom = Math.min(3, Math.max(1, zoom + (e.deltaY < 0 ? 0.12 : -0.12)));
+        applyZoom();
+      }, { passive: false });
+      box.addEventListener('dblclick', () => {
+        zoom = 1;
+        applyZoom();
+      });
     }
 
     /* =========================================================================
