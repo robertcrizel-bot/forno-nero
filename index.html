@@ -386,10 +386,21 @@
 
   <style id="mobile-hero-title-only">
     @media (max-width: 767px) {
-      #hero-title-text { font-size: 1.875rem !important; }
+      /* Título: sobe 12px e reduz a fonte de 30px para 28px. */
+      #hero-title-text {
+        font-size: 1.75rem !important;
+        position: relative;
+        top: -12px;
+      }
       #hero-title-text .hero-highlight {
         font-size: inherit !important;
         font-weight: 900 !important;
+      }
+
+      /* Reduz visualmente os botões em 20%, mantendo a posição atual. */
+      #topo [data-studio-box="Botões Ação Hero"] {
+        transform: scale(0.8);
+        transform-origin: top left;
       }
     }
   </style>
