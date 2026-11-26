@@ -365,36 +365,12 @@
     }
   </style>
 
-  <style id="hero-video-visibility">
-    /* Realça os detalhes do vídeo sem comprometer a leitura do texto. */
-    #hero-bg-video {
-      filter: brightness(1.16) contrast(1.07) saturate(1.12);
-      object-position: center center;
-    }
-    @media (min-width: 768px) {
-      #topo { min-height: 590px; }
-      #topo [data-studio-box="Bloco Texto Capa"] { max-width: 42rem; }
-    }
-    @media (max-width: 767px) {
-      /* Mantém área suficiente para o vídeo não ficar achatado ou comprimido. */
-      #topo { min-height: 560px !important; padding-bottom: 1.25rem !important; }
-      /* No celular, mostrar o quadro inteiro do vídeo: sem recorte/zoom de object-cover. */
-      #hero-bg-video {
-        object-fit: contain !important;
-        object-position: center center !important;
-        filter: brightness(1.08) contrast(1.04) saturate(1.05);
-      }
-      #topo [data-studio-box="Bloco Texto Capa"] {
-        max-width: 34rem;
-        text-shadow: 0 2px 14px rgba(0,0,0,.7);
-      }
-    }
-  </style>
+
 
   <style id="mobile-navigation-and-drinks">
     @media (max-width: 767px) {
       /* Reserva espaço para cabeçalho, faixa de horário e navegação fixa. */
-      #topo { padding-top: 10rem !important; }
+      #topo { padding-top: 12rem !important; }
 
       /* Faixa de horários em duas linhas no celular: nada de cortar o texto. */
       [data-studio-box="Faixa Horário Funcionamento"] > div {
@@ -562,24 +538,32 @@
     <!-- Vídeo de Fundo em Alta Nitidez -->
     <div class="absolute inset-0 z-0 overflow-hidden bg-forno">
       <video id="hero-bg-video" src="blob:null/30741320-efeb-44f0-bca2-7b96a764db48" autoplay="" loop="" muted="" playsinline="" class="w-full h-full object-cover opacity-100"></video>
-      <div class="absolute inset-0 bg-gradient-to-r from-forno/25 via-forno/5 to-transparent"></div>
-      <div class="absolute inset-0 bg-gradient-to-t from-forno/35 via-transparent to-forno/10 pointer-events-none"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-forno/45 via-transparent to-transparent"></div>
     </div>
 
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div data-studio-box="Bloco Texto Capa" class="max-w-xl space-y-3 sm:space-y-4" data-move-bound="1">
-        <h1 id="hero-title-text" class="font-serif-it text-3xl sm:text-6xl font-bold text-pergaminho leading-[1.08] drop-shadow-lg">
-          O sabor da <span class="italic text-dourado">verdadeira pizza napolitana.</span>
+      <div data-studio-box="Bloco Texto Capa" class="max-w-2xl space-y-5" data-move-bound="1">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-forno/80 backdrop-blur-md border border-dourado/40 text-xs text-dourado font-semibold">
+          <span>🔥 Forno a Legna 485°C • Lievitazione Naturale 48h</span>
+        </div>
+
+        <h1 id="hero-title-text" class="font-serif-it text-4xl sm:text-6xl font-bold text-pergaminho leading-[1.08] drop-shadow-lg">
+          A verdadeira arte napolitana, <span class="italic text-dourado">assada na brasa</span> e entregue na sua mesa.
         </h1>
 
-        <p id="hero-subtitle-text" class="text-xs sm:text-base text-stone-100 leading-relaxed max-w-md drop-shadow">
-          Massa artesanal, ingredientes selecionados e paixão em cada fatia.
+        <p id="hero-subtitle-text" class="text-sm sm:text-base text-stone-200 leading-relaxed max-w-xl drop-shadow">
+          Farinha italiana Tipo 00, tomates San Marzano e maturação lenta de 48 horas. Escolha sua pizza favorita, monte sua meio a meio e peça direto pelo WhatsApp.
         </p>
 
-        <div data-studio-box="Botões Ação Hero" class="flex flex-wrap items-center gap-3 pt-1" data-move-bound="1">
-          <a href="#nossas-pizzas" class="px-5 py-3 rounded-xl bg-terracota hover:bg-red-700 text-white text-xs sm:text-sm font-semibold shadow-xl shadow-red-950/60 transition active:scale-95">
-            Conheça nosso cardápio
+        <div data-studio-box="Botões Ação Hero" class="flex flex-wrap items-center gap-3 pt-2" data-move-bound="1">
+          <a href="#nossas-pizzas" class="px-6 py-3.5 rounded-xl bg-terracota hover:bg-red-700 text-white text-xs sm:text-sm font-semibold shadow-xl shadow-red-950/60 transition active:scale-95">
+            Escolher Sabores
           </a>
+          <a href="#meio-a-meio" class="px-6 py-3.5 rounded-xl bg-forno/85 hover:bg-carvao backdrop-blur-md border border-stone-700 text-pergaminho text-xs sm:text-sm font-semibold transition">
+            Montar Meio a Meio
+          </a>
+          
+          
         </div>
       </div>
     </div>
