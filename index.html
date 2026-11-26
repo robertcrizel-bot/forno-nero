@@ -2453,7 +2453,7 @@
       const totVal = document.getElementById('tracker-total-val');
 
       if (mCode) mCode.textContent = `#${ord.code}`;
-      if (mMeta) mMeta.textContent = `${ord.customer} • ${ord.mode}`;
+      if (mMeta) mMeta.textContent = `${ord.customer} • ${ord.phone || ''} • ${ord.city || ''} • ${ord.mode}`;
       if (pLabel) pLabel.textContent = `Etapa ${ord.stepIndex + 1} de ${ORDER_STEPS.length}`;
       if (pEta) pEta.textContent = `Previsão: ${step.eta}`;
       if (pBar) pBar.style.width = `${((ord.stepIndex + 1) / ORDER_STEPS.length) * 100}%`;
@@ -2594,23 +2594,39 @@
         if (params.get('cozinha') === '1') {
           openKitchenPanel();
         } else if (params.get('acompanhar') === '1') {
-          const cod = params.get('cod') || 'FN-1024';
-          const etapa = parseInt(params.get('etapa') || '0', 10);
-          APP_STATE.activeOrder = {
-            code: cod,
-            customer: APP_STATE.activeOrder?.customer || 'Você',
-            mode: APP_STATE.activeOrder?.mode || 'Delivery',
-            items: APP_STATE.activeOrder?.items || [],
-            total: APP_STATE.activeOrder?.total || 0,
-            createdAt: Date.now(),
-            stepIndex: Math.min(Math.max(etapa, 0), ORDER_STEPS.length - 1),
-            manualStep: true
-          };
-          saveActiveOrderState(APP_STATE.activeOrder);
-          renderOrderTrackerUI();
-          document.getElementById('order-tracker-modal')?.classList.remove('hidden');
+          const cod = params.get('cod') || '';
+          const token = params.get('token') || '';
+          if (cod && token) {
+            refreshPublicOrderTracking();
+            document.getElementById('order-tracker-modal')?.classList.remove('hidden');
+          } else {
+            showToast('Link de acompanhamento inválido.');
+          }
         }
       } catch (e) {}
+    }
+
+    async function refreshPublicOrderTracking() {
+      const params = new URLSearchParams(window.location.search);
+      const code = params.get('cod') || '';
+      const token = params.get('token') || '';
+      if (!code || !token) return;
+      try {
+        const response = await fetch('/api/orders?code=' + encodeURIComponent(code) + '&token=' + encodeURIComponent(token), { cache: 'no-store' });
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.error || 'Não foi possível consultar o pedido.');
+        const row = result.order;
+        APP_STATE.activeOrder = {
+          ...row,
+          stepIndex: Number(row.step_index) || 0,
+          createdAt: Date.parse(row.created_at) || Date.now(),
+          manualStep: true
+        };
+        saveActiveOrderState(APP_STATE.activeOrder);
+        renderOrderTrackerUI();
+      } catch (error) {
+        showToast(error.message);
+      }
     }
 
     function updateStoreHoursStatus() {
@@ -3696,7 +3712,8 @@
       setInterval(() => {
         syncAutoOrderProgress();
         updateStoreHoursStatus();
-      }, 15000);
+        if (new URLSearchParams(window.location.search).get('acompanhar') === '1') refreshPublicOrderTracking();
+      }, 10000);
       restoreMediaFromDB();
       mainAnimationLoop();
     };
