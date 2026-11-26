@@ -18,6 +18,14 @@ Esta pasta contém a API do Cloudflare Pages Functions e a migração inicial do
 6. Em **Settings → Variables and Secrets**, crie o segredo `KITCHEN_PIN` com um PIN forte, exclusivo da cozinha. Não coloque esse PIN no código nem o compartilhe no link público.
 7. Salve e faça um novo deploy do projeto.
 
+## Acesso ao painel da cozinha
+
+Depois de configurar o D1 e o segredo `KITCHEN_PIN`, a pizzaria pode abrir diretamente:
+
+`https://forno-nero.pages.dev/?cozinha=1`
+
+O painel solicita o PIN e lista os pedidos ativos. A lista se atualiza automaticamente a cada 10 segundos enquanto o painel estiver aberto.
+
 ## Rotas da API
 - `POST /api/orders` — cria um pedido.
 - `GET /api/orders?code=FN-...&token=...` — consulta um pedido para acompanhamento.
