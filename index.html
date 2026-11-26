@@ -452,7 +452,8 @@
   <style id="desktop-hero-original-visual">
     @media (min-width: 768px) {
       /* Mantém o vídeo preenchendo toda a capa no desktop. */
-      #topo { margin-top: 98px !important; min-height: 590px !important; }
+      /* Mantém a proporção 16:9 do vídeo no desktop para não cortar topo e base. */
+      #topo { margin-top: 98px !important; min-height: max(590px, 56.25vw) !important; }
       #hero-bg-video {
         filter: brightness(1.16) contrast(1.07) saturate(1.12);
         object-position: center center;
