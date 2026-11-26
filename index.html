@@ -365,6 +365,29 @@
     }
   </style>
 
+  <style id="hero-video-visibility">
+    /* Realça os detalhes do vídeo sem comprometer a leitura do texto. */
+    #hero-bg-video {
+      filter: brightness(1.16) contrast(1.07) saturate(1.12);
+      object-position: center center;
+    }
+    @media (min-width: 768px) {
+      #topo { min-height: 590px; }
+      #topo [data-studio-box="Bloco Texto Capa"] { max-width: 42rem; }
+    }
+    @media (max-width: 767px) {
+      #topo { min-height: 560px; }
+      #hero-bg-video {
+        object-position: 58% center;
+        filter: brightness(1.2) contrast(1.08) saturate(1.14);
+      }
+      #topo [data-studio-box="Bloco Texto Capa"] {
+        max-width: 34rem;
+        text-shadow: 0 2px 14px rgba(0,0,0,.7);
+      }
+    }
+  </style>
+
   <style id="mobile-navigation-and-drinks">
     @media (max-width: 767px) {
       /* Reserva espaço para cabeçalho, faixa de horário e navegação fixa. */
@@ -536,7 +559,8 @@
     <!-- Vídeo de Fundo em Alta Nitidez -->
     <div class="absolute inset-0 z-0 overflow-hidden bg-forno">
       <video id="hero-bg-video" src="blob:null/30741320-efeb-44f0-bca2-7b96a764db48" autoplay="" loop="" muted="" playsinline="" class="w-full h-full object-cover opacity-100"></video>
-      <div class="absolute inset-0 bg-gradient-to-r from-forno/45 via-transparent to-transparent"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-forno/25 via-forno/5 to-transparent"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-forno/35 via-transparent to-forno/10 pointer-events-none"></div>
     </div>
 
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
