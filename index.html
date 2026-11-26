@@ -369,8 +369,11 @@
 
   <style id="mobile-navigation-and-drinks">
     @media (max-width: 767px) {
-      /* Mantém o título logo abaixo da navegação fixa, sem o vazio do selo removido. */
-      #topo { padding-top: 7.5rem !important; }
+      /* Faz a capa e o vídeo começarem somente abaixo do menu fixo "Início". */
+      #topo {
+        margin-top: 154px !important;
+        padding-top: 1rem !important;
+      }
 
       /* Faixa de horários em duas linhas no celular: nada de cortar o texto. */
       [data-studio-box="Faixa Horário Funcionamento"] > div {
