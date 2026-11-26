@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 112" role="img" aria-labelledby="title desc">
+<title id="title">Forno Nero</title><desc id="desc">Forno Nero, pizzaria napolitana</desc>
+<g transform="translate(5 5)">
+<circle cx="51" cy="51" r="48" fill="#120D0A" stroke="#D4963E" stroke-width="3"/>
+<path d="M20 65V48a31 31 0 0 1 62 0v17" fill="none" stroke="#B83B22" stroke-width="7" stroke-linecap="round"/>
+<path d="M51 17c-2 10-12 14-8 25 3 8 13 8 17 1 4-8-2-16-9-26Z" fill="#D4963E"/>
+<path d="M51 31c-2 5-6 8-3 13 2 4 7 3 9 0 2-4-1-9-6-13Z" fill="#F6EFE4"/>
+<text x="51" y="83" text-anchor="middle" font-family="Georgia,serif" font-size="25" font-weight="700" fill="#F6EFE4">FN</text>
+<path d="M28 94h46" stroke="#009246" stroke-width="4"/><path d="M43 94h16" stroke="#fff" stroke-width="4"/><path d="M59 94h15" stroke="#CE2B37" stroke-width="4"/>
+</g>
+<text x="116" y="67" font-family="Georgia,'Times New Roman',serif" font-size="57" font-weight="700" letter-spacing="1.5" fill="#F6EFE4">FORNO <tspan fill="#D4963E">NERO</tspan></text>
+<path d="M119 82h365" stroke="#D4963E" stroke-width="1.5"/>
+<text x="121" y="103" font-family="Arial,sans-serif" font-size="13" font-weight="600" letter-spacing="6.1" fill="#D4963E">PIZZARIA NAPOLETANA</text>
+</svg>
