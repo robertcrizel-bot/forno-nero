@@ -314,6 +314,48 @@
       }
     }
   </style>
+
+  <style id="mobile-navigation-and-drinks">
+    @media (max-width: 767px) {
+      /* Reserva espaço para cabeçalho, faixa de horário e navegação fixa. */
+      #topo { padding-top: 12rem !important; }
+
+      /* Menu rápido horizontal, com rolagem lateral e sem ocupar largura da página. */
+      #mobile-site-nav > div {
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+      }
+      #mobile-site-nav > div::-webkit-scrollbar { display: none; }
+
+      /* Bebidas em duas colunas, seguindo o padrão compacto das pizzas. */
+      #drinks-cards-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 0.75rem !important;
+      }
+      #drinks-cards-grid > div {
+        min-width: 0;
+        padding: 0.7rem !important;
+        gap: 0.55rem !important;
+        border-radius: 1rem;
+      }
+      #drinks-cards-grid h4 {
+        font-size: 0.95rem !important;
+        line-height: 1.2 !important;
+      }
+      #drinks-cards-grid p { font-size: 0.67rem !important; line-height: 1.35 !important; }
+      #drinks-cards-grid > div > div > div > span:last-child {
+        font-size: 0.85rem !important;
+      }
+      #drinks-cards-grid button {
+        padding: 0.48rem 0.3rem !important;
+        font-size: 0.65rem !important;
+      }
+
+      /* Esconde os indicadores técnicos do giro: a mensagem promocional fica em destaque. */
+      #stage-angle-badge, #btn-toggle-autorotate { display: none !important; }
+    }
+  </style>
+
 </head>
 <body class="font-sans antialiased selection:bg-terracota selection:text-white">
 
@@ -376,6 +418,19 @@
       </div>
     </div>
   </div>
+
+  <!-- Navegação rápida mobile -->
+  <nav id="mobile-site-nav" aria-label="Navegação principal" class="md:hidden fixed top-[108px] inset-x-0 z-40 bg-forno/95 backdrop-blur-md border-b border-dourado/25 shadow-lg">
+    <div class="flex items-center gap-5 overflow-x-auto whitespace-nowrap px-4 py-3 text-[11px] font-semibold uppercase tracking-wider text-stone-200">
+      <a href="#topo" class="text-dourado">Início</a>
+      <a href="#nossas-pizzas" class="hover:text-dourado">Pizzas</a>
+      <a href="#il-menu" class="hover:text-dourado">Cardápio</a>
+      <a href="#secao-bebidas" class="hover:text-dourado">Bebidas</a>
+      <a href="#avaliacoes-google" class="hover:text-dourado">Avaliações</a>
+      <a href="#la-tradizione" class="hover:text-dourado">Nossa história</a>
+      <a href="#contato" class="hover:text-dourado">Contato</a>
+    </div>
+  </nav>
 
   <!-- ==================== BARRA FLUTUANTE DE ACOMPANHAMENTO DE PEDIDO ==================== -->
   <div id="live-order-banner" class="hidden fixed top-[102px] inset-x-0 z-30 px-4">
@@ -516,13 +571,12 @@
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
         <!-- Esquerda: Palco Interativo (Vídeo 16:9 sem reiniciar ao clicar ou Foto Recortada) -->
         <div data-studio-box="Palco Visualização Pizza" class="lg:col-span-7 rounded-3xl bg-carvao border border-stone-800/90 p-4 sm:p-5 flex flex-col justify-between shadow-2xl" data-move-bound="1">
-          <div class="flex items-center justify-between gap-2 pb-3 border-b border-stone-800/70">
-            <span id="stage-hint-label" class="text-xs text-stone-400">↔ Arraste para controlar o giro do vídeo</span>
-            <div class="flex items-center gap-2">
-              <button id="btn-toggle-autorotate" type="button" class="px-3 py-1.5 rounded-lg bg-stone-900 hover:bg-stone-800 border border-stone-700 text-xs text-dourado font-medium transition">
-                🔄 Auto Rotação: LIGADA
-              </button>
-              <span id="stage-angle-badge" class="px-2.5 py-1.5 rounded-lg bg-stone-900 border border-stone-800 text-xs text-stone-300 font-mono">0°</span>
+          <div class="pb-3 border-b border-stone-800/70">
+            <p class="text-[10px] uppercase tracking-[0.24em] text-dourado font-bold">Um convite aos sentidos</p>
+            <p id="stage-hint-label" class="font-serif-it text-lg sm:text-xl font-bold text-pergaminho mt-1">🔥 Dê o play no apetite: veja de perto a pizza de verdade, feita para sair do forno direto para sua mesa.</p>
+            <div class="hidden" aria-hidden="true">
+              <button id="btn-toggle-autorotate" type="button">Auto Rotação</button>
+              <span id="stage-angle-badge">0°</span>
             </div>
           </div>
 
@@ -851,7 +905,7 @@
           <p class="text-xs text-stone-600">Adicione bebidas para acompanhar sua pizza na entrega.</p>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div id="drinks-cards-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <div class="rounded-2xl bg-white border border-stone-200/90 p-4 shadow-md flex flex-col justify-between gap-3">
             <div>
               <div class="flex items-center justify-between gap-2">
@@ -1674,8 +1728,8 @@
       if (!container) return;
 
       if (pizza.videoUrl) {
-        if (badge) badge.textContent = 'Vídeo 360° Real';
-        if (hint) hint.textContent = '↔ Arraste para controlar o giro do vídeo';
+        if (badge) badge.textContent = 'Feita para despertar seu apetite';
+        if (hint) hint.textContent = '🔥 Dê o play no apetite: veja de perto a pizza de verdade, feita para sair do forno direto para sua mesa.';
 
         const existingVid = document.getElementById('active-flavor-video');
         if (existingVid && APP_STATE.currentRenderedVideoSrc === pizza.videoUrl && !resetVideo) {
