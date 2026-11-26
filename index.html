@@ -376,8 +376,8 @@
       #topo [data-studio-box="Bloco Texto Capa"] { max-width: 42rem; }
     }
     @media (max-width: 767px) {
-      /* A altura acompanha o conteúdo: elimina o espaço vazio antes do carrossel. */
-      #topo { min-height: 0 !important; padding-bottom: 1.25rem !important; }
+      /* Mantém área suficiente para o vídeo não ficar achatado ou comprimido. */
+      #topo { min-height: 560px !important; padding-bottom: 1.25rem !important; }
       /* No celular, mostrar o quadro inteiro do vídeo: sem recorte/zoom de object-cover. */
       #hero-bg-video {
         object-fit: contain !important;
