@@ -2189,6 +2189,37 @@
     /* =========================================================================
        4. CARRINHO, CHECKOUT WHATSAPP & ACOMPANHAMENTO INTELIGENTE
        ========================================================================= */
+    function saveCartToStorage() {
+      try {
+        localStorage.setItem('fornoNeroCart', JSON.stringify(APP_STATE.cart));
+      } catch (e) {
+        console.warn('Não foi possível salvar o pedido neste dispositivo.', e);
+      }
+    }
+
+    function restoreCartFromStorage() {
+      try {
+        const savedCart = JSON.parse(localStorage.getItem('fornoNeroCart') || '[]');
+        APP_STATE.cart = Array.isArray(savedCart)
+          ? savedCart.filter((item) =>
+              item && typeof item.title === 'string' &&
+              typeof item.size === 'string' && typeof item.crust === 'string' &&
+              Number.isFinite(Number(item.unitPrice)) &&
+              Number.isFinite(Number(item.qty)) && Number(item.qty) > 0
+            ).map((item) => ({
+              id: item.id || (Date.now() + Math.random()),
+              title: item.title,
+              size: item.size,
+              crust: item.crust,
+              unitPrice: Number(item.unitPrice),
+              qty: Number(item.qty)
+            }))
+          : [];
+      } catch (e) {
+        APP_STATE.cart = [];
+      }
+    }
+
     function addItemToCart({ title, size, crust, unitPrice }) {
       const existing = APP_STATE.cart.find(
         (it) => it.title === title && it.size === size && it.crust === crust
@@ -2205,6 +2236,7 @@
           qty: 1
         });
       }
+      saveCartToStorage();
       renderCartDrawer();
       showToast(`${title} adicionada ao pedido!`);
     }
@@ -2214,6 +2246,7 @@
       if (!item) return;
       item.qty += delta;
       if (item.qty <= 0) APP_STATE.cart.splice(index, 1);
+      saveCartToStorage();
       renderCartDrawer();
     }
 
@@ -3607,6 +3640,7 @@
         }
       }
 
+      restoreCartFromStorage();
       bindAllEvents();
       buildArchCarousel();
       initArchCarouselControls();
