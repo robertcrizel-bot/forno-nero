@@ -591,7 +591,7 @@
         <span class="w-8 h-8 rounded-full bg-dourado/20 border border-dourado/40 flex items-center justify-center text-sm">🔥</span>
         <div>
           <p class="text-xs font-bold text-pergaminho">
-            Pedido <span id="banner-order-code" class="text-dourado">#FN-0000</span> • <span id="banner-order-status" class="text-emerald-300">Pedido Confirmado</span>
+            Pedido <span id="banner-order-code" class="text-dourado">#FN-0000</span> • <span id="banner-order-status" class="text-emerald-300">Pedido Recebido</span>
           </p>
           <p id="banner-order-eta" class="text-[11px] text-stone-400">Previsão: 35–45 min</p>
         </div>
@@ -1696,7 +1696,7 @@
     }
 
     const ORDER_STEPS = [
-      { title: 'Pedido Confirmado', desc: 'Comanda recebida pela forneria.', eta: '35–45 min', autoMin: 0 },
+      { title: 'Pedido Recebido', desc: 'Pedido enviado à forneria. Aguardando confirmação da cozinha.', eta: 'Aguardando confirmação', autoMin: 0 },
       { title: 'Abrindo a Massa 48h', desc: 'Disco aberto manualmente na bancada.', eta: '25–35 min', autoMin: 2 },
       { title: 'No Forno a Lenha 485°C', desc: 'Assando na pedra refratária.', eta: '15–20 min', autoMin: 8 },
       { title: 'Saiu para Entrega / Pronto no Balcão', desc: 'Em embalagem térmica selada.', eta: '5–12 min', autoMin: 18 },
