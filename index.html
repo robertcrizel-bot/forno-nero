@@ -333,6 +333,38 @@
     }
   </style>
 
+  <style id="mobile-header-overflow-fix">
+    @media (max-width: 767px) {
+      header[data-studio-box="Cabeçalho Topo"] > div {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+        gap: 8px !important;
+      }
+      header[data-studio-box="Cabeçalho Topo"] > div > a {
+        min-width: 0;
+        gap: 7px !important;
+      }
+      #site-brand-name { font-size: 1.15rem !important; letter-spacing: .02em !important; white-space: nowrap; }
+      #site-brand-sub { font-size: 7px !important; letter-spacing: .12em !important; white-space: nowrap; }
+      header[data-studio-box="Cabeçalho Topo"] > div > a > div:first-child {
+        width: 34px !important; height: 34px !important; flex: 0 0 34px;
+      }
+      header[data-studio-box="Cabeçalho Topo"] > div > div:last-child {
+        min-width: 0; gap: 5px !important;
+      }
+      #btn-open-cart {
+        padding: 8px 9px !important;
+        gap: 5px !important;
+        white-space: nowrap;
+        font-size: 10px !important;
+      }
+      #cart-count-badge { min-width: 19px !important; height: 19px !important; }
+    }
+  </style>
+
   <style id="mobile-navigation-and-drinks">
     @media (max-width: 767px) {
       /* Reserva espaço para cabeçalho, faixa de horário e navegação fixa. */
@@ -663,705 +695,37 @@
   <!-- ==================== CONSTRUTOR MEIO A MEIO ==================== -->
   <section id="meio-a-meio" data-studio-box="Seção Meio a Meio" class="py-8 sm:py-10 bg-carvao border-b border-stone-800/80" data-move-bound="1">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div data-studio-box="Título Meio a Meio" class="text-center max-w-2xl mx-auto mb-7" data-move-bound="1">
+      <div data-studio-box="Título Meio a Meio" class="text-center max-w-2xl mx-auto mb-7">
         <span class="text-xs uppercase tracking-[0.24em] text-dourado font-semibold">Dois Sabores em Uma</span>
         <h2 class="font-serif-it text-3xl sm:text-5xl font-bold text-pergaminho mt-1">Monte sua Pizza Meio a Meio</h2>
         <p class="text-sm text-stone-300 mt-2">Escolha os dois sabores, defina o tamanho e finalize com sua borda preferida.</p>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-        <div data-studio-box="Primeira Metade" class="rounded-2xl bg-forno border border-stone-800 p-4 sm:p-5 space-y-3" data-move-bound="1">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
+        <div data-studio-box="Primeira Metade" class="rounded-2xl bg-forno border border-stone-800 p-4 sm:p-5 space-y-3">
           <div class="flex items-center gap-3">
             <span class="flex items-center justify-center w-8 h-8 rounded-full bg-dourado text-espresso font-bold">1</span>
             <div><p class="text-xs uppercase tracking-wider text-dourado font-semibold">Primeira etapa</p><h3 class="text-pergaminho font-semibold">Escolha a 1ª metade</h3></div>
           </div>
-          <select id="half-left-select" class="w-full rounded-xl bg-carvao border border-stone-700 px-3.5 py-3 text-sm text-pergaminho focus:outline-none focus:border-dourado"><option value="0">4 Queijos — R<!-- ==================== CONSTRUTOR MEIO A MEIO ==================== -->
-  <section id="meio-a-meio" data-studio-box="Seção Meio a Meio" class="py-8 sm:py-10 bg-carvao border-b border-stone-800/80" data-move-bound="1">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div data-studio-box="Título Meio a Meio" class="text-center max-w-2xl mx-auto mb-6" data-move-bound="1">
-        <span class="text-xs uppercase tracking-[0.24em] text-dourado font-semibold">Dois Sabores em Uma</span>
-        <h2 class="font-serif-it text-3xl sm:text-5xl font-bold text-pergaminho mt-1">Monte sua Pizza Meio a Meio</h2>
-        <p class="text-sm text-stone-300 mt-2">Combine duas metades artesanais e visualize o resultado na hora. O valor considera o sabor de maior valor entre os escolhidos.</p>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-        <!-- Metade Esquerda -->
-        <div data-studio-box="Metade Esquerda Meio a Meio" class="lg:col-span-4 rounded-2xl bg-forno border border-stone-800 p-5 space-y-4" data-move-bound="1">
-          <span class="text-xs uppercase tracking-wider text-dourado font-semibold">1ª Metade (Esquerda)</span>
-          <select id="half-left-select" class="w-full rounded-xl bg-carvao border border-stone-700 px-3.5 py-2.5 text-sm text-pergaminho focus:outline-none focus:border-dourado"><option value="0">4 Queijos — R$&nbsp;82,00</option><option value="1">Frango Catupiry — R$&nbsp;78,00</option><option value="2">Portuguesa — R$&nbsp;76,00</option><option value="3">Margherita Verace — R$&nbsp;68,00</option><option value="4">Pepperoni Diavola — R$&nbsp;79,00</option><option value="5">Chocolate com Morango — R$&nbsp;74,00</option></select>
-          <p id="half-left-desc" class="text-xs text-stone-400 leading-relaxed min-h-[48px]">Harmonização cremosa de muçarela fresca, gorgonzola italiano, provolone defumado e parmesão maturado gratinado no forno a lenha.</p>
+          <select id="half-left-select" class="w-full rounded-xl bg-carvao border border-stone-700 px-3.5 py-3 text-sm text-pergaminho focus:outline-none focus:border-dourado"><option value="0">Carregando sabores...</option></select>
+          <p id="half-left-desc" class="text-xs text-stone-400 leading-relaxed min-h-[42px]"></p>
         </div>
 
-        <!-- Disco Visual Central -->
-        <div data-studio-box="Disco Central Meio a Meio" class="lg:col-span-4 flex flex-col items-center justify-center space-y-4" data-move-bound="1">
-          <div class="half-half-disc w-[230px] h-[230px] sm:w-[270px] sm:h-[270px] bg-forno">
-            <img id="half-left-img" src="blob:null/8c0a9f44-429d-4763-8db6-83b22900a1bc" alt="Metade Esquerda" class="absolute inset-0 w-full h-full object-cover half-left-clip">
-            <img id="half-right-img" src="blob:null/1bcf9adb-116c-45d5-9906-a20d0057b3e3" alt="Metade Direita" class="absolute inset-0 w-full h-full object-cover half-right-clip">
-            <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 w-[2px] bg-dourado/70 shadow"></div>
-          </div>
-
-          <div class="w-full max-w-xs space-y-3 text-center">
-            <div class="flex items-center justify-center gap-2">
-              <select id="half-size-select" class="rounded-xl bg-forno border border-stone-700 px-3 py-2 text-xs text-pergaminho">
-                <option value="Grande (8 fatias)|1">Grande (8 fatias)</option>
-                <option value="Família (12 fatias)|1.28">Família (12 fatias)</option>
-              </select>
-              <select id="half-crust-select" class="rounded-xl bg-forno border border-stone-700 px-3 py-2 text-xs text-pergaminho">
-                <option value="Tradicional Italiana|0">Borda Tradicional</option>
-                <option value="Catupiry Original|12">Borda Catupiry (+R$12)</option>
-                <option value="Cheddar Cremoso|10">Borda Cheddar (+R$10)</option>
-              </select>
-            </div>
-
-            <div class="text-2xl font-serif-it font-bold text-dourado" id="half-total-price">R$&nbsp;82,00</div>
-
-            <button id="btn-add-half-pizza" type="button" class="w-full py-3 px-5 rounded-xl bg-terracota hover:bg-red-700 text-white text-xs sm:text-sm font-semibold shadow-lg transition active:scale-95">
-              + Adicionar Meio a Meio ao Pedido
-            </button>
-          </div>
-        </div>
-
-        <!-- Metade Direita -->
-        <div data-studio-box="Metade Direita Meio a Meio" class="lg:col-span-4 rounded-2xl bg-forno border border-stone-800 p-5 space-y-4" data-move-bound="1">
-          <span class="text-xs uppercase tracking-wider text-dourado font-semibold">2ª Metade (Direita)</span>
-          <select id="half-right-select" class="w-full rounded-xl bg-carvao border border-stone-700 px-3.5 py-2.5 text-sm text-pergaminho focus:outline-none focus:border-dourado"><option value="0">4 Queijos — R$&nbsp;82,00</option><option value="1">Frango Catupiry — R$&nbsp;78,00</option><option value="2">Portuguesa — R$&nbsp;76,00</option><option value="3">Margherita Verace — R$&nbsp;68,00</option><option value="4">Pepperoni Diavola — R$&nbsp;79,00</option><option value="5">Chocolate com Morango — R$&nbsp;74,00</option></select>
-          <p id="half-right-desc" class="text-xs text-stone-400 leading-relaxed min-h-[48px]">Peito de frango desfiado temperado com ervas finas, coberto com espiral generosa do legítimo Catupiry cremoso e azeitonas.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  nbsp;82,00</option><option value="1">Frango Catupiry — R<!-- ==================== CONSTRUTOR MEIO A MEIO ==================== -->
-  <section id="meio-a-meio" data-studio-box="Seção Meio a Meio" class="py-8 sm:py-10 bg-carvao border-b border-stone-800/80" data-move-bound="1">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div data-studio-box="Título Meio a Meio" class="text-center max-w-2xl mx-auto mb-6" data-move-bound="1">
-        <span class="text-xs uppercase tracking-[0.24em] text-dourado font-semibold">Dois Sabores em Uma</span>
-        <h2 class="font-serif-it text-3xl sm:text-5xl font-bold text-pergaminho mt-1">Monte sua Pizza Meio a Meio</h2>
-        <p class="text-sm text-stone-300 mt-2">Combine duas metades artesanais e visualize o resultado na hora. O valor considera o sabor de maior valor entre os escolhidos.</p>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-        <!-- Metade Esquerda -->
-        <div data-studio-box="Metade Esquerda Meio a Meio" class="lg:col-span-4 rounded-2xl bg-forno border border-stone-800 p-5 space-y-4" data-move-bound="1">
-          <span class="text-xs uppercase tracking-wider text-dourado font-semibold">1ª Metade (Esquerda)</span>
-          <select id="half-left-select" class="w-full rounded-xl bg-carvao border border-stone-700 px-3.5 py-2.5 text-sm text-pergaminho focus:outline-none focus:border-dourado"><option value="0">4 Queijos — R$&nbsp;82,00</option><option value="1">Frango Catupiry — R$&nbsp;78,00</option><option value="2">Portuguesa — R$&nbsp;76,00</option><option value="3">Margherita Verace — R$&nbsp;68,00</option><option value="4">Pepperoni Diavola — R$&nbsp;79,00</option><option value="5">Chocolate com Morango — R$&nbsp;74,00</option></select>
-          <p id="half-left-desc" class="text-xs text-stone-400 leading-relaxed min-h-[48px]">Harmonização cremosa de muçarela fresca, gorgonzola italiano, provolone defumado e parmesão maturado gratinado no forno a lenha.</p>
-        </div>
-
-        <!-- Disco Visual Central -->
-        <div data-studio-box="Disco Central Meio a Meio" class="lg:col-span-4 flex flex-col items-center justify-center space-y-4" data-move-bound="1">
-          <div class="half-half-disc w-[230px] h-[230px] sm:w-[270px] sm:h-[270px] bg-forno">
-            <img id="half-left-img" src="blob:null/8c0a9f44-429d-4763-8db6-83b22900a1bc" alt="Metade Esquerda" class="absolute inset-0 w-full h-full object-cover half-left-clip">
-            <img id="half-right-img" src="blob:null/1bcf9adb-116c-45d5-9906-a20d0057b3e3" alt="Metade Direita" class="absolute inset-0 w-full h-full object-cover half-right-clip">
-            <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 w-[2px] bg-dourado/70 shadow"></div>
-          </div>
-
-          <div class="w-full max-w-xs space-y-3 text-center">
-            <div class="flex items-center justify-center gap-2">
-              <select id="half-size-select" class="rounded-xl bg-forno border border-stone-700 px-3 py-2 text-xs text-pergaminho">
-                <option value="Grande (8 fatias)|1">Grande (8 fatias)</option>
-                <option value="Família (12 fatias)|1.28">Família (12 fatias)</option>
-              </select>
-              <select id="half-crust-select" class="rounded-xl bg-forno border border-stone-700 px-3 py-2 text-xs text-pergaminho">
-                <option value="Tradicional Italiana|0">Borda Tradicional</option>
-                <option value="Catupiry Original|12">Borda Catupiry (+R$12)</option>
-                <option value="Cheddar Cremoso|10">Borda Cheddar (+R$10)</option>
-              </select>
-            </div>
-
-            <div class="text-2xl font-serif-it font-bold text-dourado" id="half-total-price">R$&nbsp;82,00</div>
-
-            <button id="btn-add-half-pizza" type="button" class="w-full py-3 px-5 rounded-xl bg-terracota hover:bg-red-700 text-white text-xs sm:text-sm font-semibold shadow-lg transition active:scale-95">
-              + Adicionar Meio a Meio ao Pedido
-            </button>
-          </div>
-        </div>
-
-        <!-- Metade Direita -->
-        <div data-studio-box="Metade Direita Meio a Meio" class="lg:col-span-4 rounded-2xl bg-forno border border-stone-800 p-5 space-y-4" data-move-bound="1">
-          <span class="text-xs uppercase tracking-wider text-dourado font-semibold">2ª Metade (Direita)</span>
-          <select id="half-right-select" class="w-full rounded-xl bg-carvao border border-stone-700 px-3.5 py-2.5 text-sm text-pergaminho focus:outline-none focus:border-dourado"><option value="0">4 Queijos — R$&nbsp;82,00</option><option value="1">Frango Catupiry — R$&nbsp;78,00</option><option value="2">Portuguesa — R$&nbsp;76,00</option><option value="3">Margherita Verace — R$&nbsp;68,00</option><option value="4">Pepperoni Diavola — R$&nbsp;79,00</option><option value="5">Chocolate com Morango — R$&nbsp;74,00</option></select>
-          <p id="half-right-desc" class="text-xs text-stone-400 leading-relaxed min-h-[48px]">Peito de frango desfiado temperado com ervas finas, coberto com espiral generosa do legítimo Catupiry cremoso e azeitonas.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  nbsp;78,00</option><option value="2">Portuguesa — R<!-- ==================== CONSTRUTOR MEIO A MEIO ==================== -->
-  <section id="meio-a-meio" data-studio-box="Seção Meio a Meio" class="py-8 sm:py-10 bg-carvao border-b border-stone-800/80" data-move-bound="1">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div data-studio-box="Título Meio a Meio" class="text-center max-w-2xl mx-auto mb-6" data-move-bound="1">
-        <span class="text-xs uppercase tracking-[0.24em] text-dourado font-semibold">Dois Sabores em Uma</span>
-        <h2 class="font-serif-it text-3xl sm:text-5xl font-bold text-pergaminho mt-1">Monte sua Pizza Meio a Meio</h2>
-        <p class="text-sm text-stone-300 mt-2">Combine duas metades artesanais e visualize o resultado na hora. O valor considera o sabor de maior valor entre os escolhidos.</p>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-        <!-- Metade Esquerda -->
-        <div data-studio-box="Metade Esquerda Meio a Meio" class="lg:col-span-4 rounded-2xl bg-forno border border-stone-800 p-5 space-y-4" data-move-bound="1">
-          <span class="text-xs uppercase tracking-wider text-dourado font-semibold">1ª Metade (Esquerda)</span>
-          <select id="half-left-select" class="w-full rounded-xl bg-carvao border border-stone-700 px-3.5 py-2.5 text-sm text-pergaminho focus:outline-none focus:border-dourado"><option value="0">4 Queijos — R$&nbsp;82,00</option><option value="1">Frango Catupiry — R$&nbsp;78,00</option><option value="2">Portuguesa — R$&nbsp;76,00</option><option value="3">Margherita Verace — R$&nbsp;68,00</option><option value="4">Pepperoni Diavola — R$&nbsp;79,00</option><option value="5">Chocolate com Morango — R$&nbsp;74,00</option></select>
-          <p id="half-left-desc" class="text-xs text-stone-400 leading-relaxed min-h-[48px]">Harmonização cremosa de muçarela fresca, gorgonzola italiano, provolone defumado e parmesão maturado gratinado no forno a lenha.</p>
-        </div>
-
-        <!-- Disco Visual Central -->
-        <div data-studio-box="Disco Central Meio a Meio" class="lg:col-span-4 flex flex-col items-center justify-center space-y-4" data-move-bound="1">
-          <div class="half-half-disc w-[230px] h-[230px] sm:w-[270px] sm:h-[270px] bg-forno">
-            <img id="half-left-img" src="blob:null/8c0a9f44-429d-4763-8db6-83b22900a1bc" alt="Metade Esquerda" class="absolute inset-0 w-full h-full object-cover half-left-clip">
-            <img id="half-right-img" src="blob:null/1bcf9adb-116c-45d5-9906-a20d0057b3e3" alt="Metade Direita" class="absolute inset-0 w-full h-full object-cover half-right-clip">
-            <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 w-[2px] bg-dourado/70 shadow"></div>
-          </div>
-
-          <div class="w-full max-w-xs space-y-3 text-center">
-            <div class="flex items-center justify-center gap-2">
-              <select id="half-size-select" class="rounded-xl bg-forno border border-stone-700 px-3 py-2 text-xs text-pergaminho">
-                <option value="Grande (8 fatias)|1">Grande (8 fatias)</option>
-                <option value="Família (12 fatias)|1.28">Família (12 fatias)</option>
-              </select>
-              <select id="half-crust-select" class="rounded-xl bg-forno border border-stone-700 px-3 py-2 text-xs text-pergaminho">
-                <option value="Tradicional Italiana|0">Borda Tradicional</option>
-                <option value="Catupiry Original|12">Borda Catupiry (+R$12)</option>
-                <option value="Cheddar Cremoso|10">Borda Cheddar (+R$10)</option>
-              </select>
-            </div>
-
-            <div class="text-2xl font-serif-it font-bold text-dourado" id="half-total-price">R$&nbsp;82,00</div>
-
-            <button id="btn-add-half-pizza" type="button" class="w-full py-3 px-5 rounded-xl bg-terracota hover:bg-red-700 text-white text-xs sm:text-sm font-semibold shadow-lg transition active:scale-95">
-              + Adicionar Meio a Meio ao Pedido
-            </button>
-          </div>
-        </div>
-
-        <!-- Metade Direita -->
-        <div data-studio-box="Metade Direita Meio a Meio" class="lg:col-span-4 rounded-2xl bg-forno border border-stone-800 p-5 space-y-4" data-move-bound="1">
-          <span class="text-xs uppercase tracking-wider text-dourado font-semibold">2ª Metade (Direita)</span>
-          <select id="half-right-select" class="w-full rounded-xl bg-carvao border border-stone-700 px-3.5 py-2.5 text-sm text-pergaminho focus:outline-none focus:border-dourado"><option value="0">4 Queijos — R$&nbsp;82,00</option><option value="1">Frango Catupiry — R$&nbsp;78,00</option><option value="2">Portuguesa — R$&nbsp;76,00</option><option value="3">Margherita Verace — R$&nbsp;68,00</option><option value="4">Pepperoni Diavola — R$&nbsp;79,00</option><option value="5">Chocolate com Morango — R$&nbsp;74,00</option></select>
-          <p id="half-right-desc" class="text-xs text-stone-400 leading-relaxed min-h-[48px]">Peito de frango desfiado temperado com ervas finas, coberto com espiral generosa do legítimo Catupiry cremoso e azeitonas.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  nbsp;76,00</option><option value="3">Margherita Verace — R<!-- ==================== CONSTRUTOR MEIO A MEIO ==================== -->
-  <section id="meio-a-meio" data-studio-box="Seção Meio a Meio" class="py-8 sm:py-10 bg-carvao border-b border-stone-800/80" data-move-bound="1">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div data-studio-box="Título Meio a Meio" class="text-center max-w-2xl mx-auto mb-6" data-move-bound="1">
-        <span class="text-xs uppercase tracking-[0.24em] text-dourado font-semibold">Dois Sabores em Uma</span>
-        <h2 class="font-serif-it text-3xl sm:text-5xl font-bold text-pergaminho mt-1">Monte sua Pizza Meio a Meio</h2>
-        <p class="text-sm text-stone-300 mt-2">Combine duas metades artesanais e visualize o resultado na hora. O valor considera o sabor de maior valor entre os escolhidos.</p>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-        <!-- Metade Esquerda -->
-        <div data-studio-box="Metade Esquerda Meio a Meio" class="lg:col-span-4 rounded-2xl bg-forno border border-stone-800 p-5 space-y-4" data-move-bound="1">
-          <span class="text-xs uppercase tracking-wider text-dourado font-semibold">1ª Metade (Esquerda)</span>
-          <select id="half-left-select" class="w-full rounded-xl bg-carvao border border-stone-700 px-3.5 py-2.5 text-sm text-pergaminho focus:outline-none focus:border-dourado"><option value="0">4 Queijos — R$&nbsp;82,00</option><option value="1">Frango Catupiry — R$&nbsp;78,00</option><option value="2">Portuguesa — R$&nbsp;76,00</option><option value="3">Margherita Verace — R$&nbsp;68,00</option><option value="4">Pepperoni Diavola — R$&nbsp;79,00</option><option value="5">Chocolate com Morango — R$&nbsp;74,00</option></select>
-          <p id="half-left-desc" class="text-xs text-stone-400 leading-relaxed min-h-[48px]">Harmonização cremosa de muçarela fresca, gorgonzola italiano, provolone defumado e parmesão maturado gratinado no forno a lenha.</p>
-        </div>
-
-        <!-- Disco Visual Central -->
-        <div data-studio-box="Disco Central Meio a Meio" class="lg:col-span-4 flex flex-col items-center justify-center space-y-4" data-move-bound="1">
-          <div class="half-half-disc w-[230px] h-[230px] sm:w-[270px] sm:h-[270px] bg-forno">
-            <img id="half-left-img" src="blob:null/8c0a9f44-429d-4763-8db6-83b22900a1bc" alt="Metade Esquerda" class="absolute inset-0 w-full h-full object-cover half-left-clip">
-            <img id="half-right-img" src="blob:null/1bcf9adb-116c-45d5-9906-a20d0057b3e3" alt="Metade Direita" class="absolute inset-0 w-full h-full object-cover half-right-clip">
-            <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 w-[2px] bg-dourado/70 shadow"></div>
-          </div>
-
-          <div class="w-full max-w-xs space-y-3 text-center">
-            <div class="flex items-center justify-center gap-2">
-              <select id="half-size-select" class="rounded-xl bg-forno border border-stone-700 px-3 py-2 text-xs text-pergaminho">
-                <option value="Grande (8 fatias)|1">Grande (8 fatias)</option>
-                <option value="Família (12 fatias)|1.28">Família (12 fatias)</option>
-              </select>
-              <select id="half-crust-select" class="rounded-xl bg-forno border border-stone-700 px-3 py-2 text-xs text-pergaminho">
-                <option value="Tradicional Italiana|0">Borda Tradicional</option>
-                <option value="Catupiry Original|12">Borda Catupiry (+R$12)</option>
-                <option value="Cheddar Cremoso|10">Borda Cheddar (+R$10)</option>
-              </select>
-            </div>
-
-            <div class="text-2xl font-serif-it font-bold text-dourado" id="half-total-price">R$&nbsp;82,00</div>
-
-            <button id="btn-add-half-pizza" type="button" class="w-full py-3 px-5 rounded-xl bg-terracota hover:bg-red-700 text-white text-xs sm:text-sm font-semibold shadow-lg transition active:scale-95">
-              + Adicionar Meio a Meio ao Pedido
-            </button>
-          </div>
-        </div>
-
-        <!-- Metade Direita -->
-        <div data-studio-box="Metade Direita Meio a Meio" class="lg:col-span-4 rounded-2xl bg-forno border border-stone-800 p-5 space-y-4" data-move-bound="1">
-          <span class="text-xs uppercase tracking-wider text-dourado font-semibold">2ª Metade (Direita)</span>
-          <select id="half-right-select" class="w-full rounded-xl bg-carvao border border-stone-700 px-3.5 py-2.5 text-sm text-pergaminho focus:outline-none focus:border-dourado"><option value="0">4 Queijos — R$&nbsp;82,00</option><option value="1">Frango Catupiry — R$&nbsp;78,00</option><option value="2">Portuguesa — R$&nbsp;76,00</option><option value="3">Margherita Verace — R$&nbsp;68,00</option><option value="4">Pepperoni Diavola — R$&nbsp;79,00</option><option value="5">Chocolate com Morango — R$&nbsp;74,00</option></select>
-          <p id="half-right-desc" class="text-xs text-stone-400 leading-relaxed min-h-[48px]">Peito de frango desfiado temperado com ervas finas, coberto com espiral generosa do legítimo Catupiry cremoso e azeitonas.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  nbsp;68,00</option><option value="4">Pepperoni Diavola — R<!-- ==================== CONSTRUTOR MEIO A MEIO ==================== -->
-  <section id="meio-a-meio" data-studio-box="Seção Meio a Meio" class="py-8 sm:py-10 bg-carvao border-b border-stone-800/80" data-move-bound="1">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div data-studio-box="Título Meio a Meio" class="text-center max-w-2xl mx-auto mb-6" data-move-bound="1">
-        <span class="text-xs uppercase tracking-[0.24em] text-dourado font-semibold">Dois Sabores em Uma</span>
-        <h2 class="font-serif-it text-3xl sm:text-5xl font-bold text-pergaminho mt-1">Monte sua Pizza Meio a Meio</h2>
-        <p class="text-sm text-stone-300 mt-2">Combine duas metades artesanais e visualize o resultado na hora. O valor considera o sabor de maior valor entre os escolhidos.</p>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-        <!-- Metade Esquerda -->
-        <div data-studio-box="Metade Esquerda Meio a Meio" class="lg:col-span-4 rounded-2xl bg-forno border border-stone-800 p-5 space-y-4" data-move-bound="1">
-          <span class="text-xs uppercase tracking-wider text-dourado font-semibold">1ª Metade (Esquerda)</span>
-          <select id="half-left-select" class="w-full rounded-xl bg-carvao border border-stone-700 px-3.5 py-2.5 text-sm text-pergaminho focus:outline-none focus:border-dourado"><option value="0">4 Queijos — R$&nbsp;82,00</option><option value="1">Frango Catupiry — R$&nbsp;78,00</option><option value="2">Portuguesa — R$&nbsp;76,00</option><option value="3">Margherita Verace — R$&nbsp;68,00</option><option value="4">Pepperoni Diavola — R$&nbsp;79,00</option><option value="5">Chocolate com Morango — R$&nbsp;74,00</option></select>
-          <p id="half-left-desc" class="text-xs text-stone-400 leading-relaxed min-h-[48px]">Harmonização cremosa de muçarela fresca, gorgonzola italiano, provolone defumado e parmesão maturado gratinado no forno a lenha.</p>
-        </div>
-
-        <!-- Disco Visual Central -->
-        <div data-studio-box="Disco Central Meio a Meio" class="lg:col-span-4 flex flex-col items-center justify-center space-y-4" data-move-bound="1">
-          <div class="half-half-disc w-[230px] h-[230px] sm:w-[270px] sm:h-[270px] bg-forno">
-            <img id="half-left-img" src="blob:null/8c0a9f44-429d-4763-8db6-83b22900a1bc" alt="Metade Esquerda" class="absolute inset-0 w-full h-full object-cover half-left-clip">
-            <img id="half-right-img" src="blob:null/1bcf9adb-116c-45d5-9906-a20d0057b3e3" alt="Metade Direita" class="absolute inset-0 w-full h-full object-cover half-right-clip">
-            <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 w-[2px] bg-dourado/70 shadow"></div>
-          </div>
-
-          <div class="w-full max-w-xs space-y-3 text-center">
-            <div class="flex items-center justify-center gap-2">
-              <select id="half-size-select" class="rounded-xl bg-forno border border-stone-700 px-3 py-2 text-xs text-pergaminho">
-                <option value="Grande (8 fatias)|1">Grande (8 fatias)</option>
-                <option value="Família (12 fatias)|1.28">Família (12 fatias)</option>
-              </select>
-              <select id="half-crust-select" class="rounded-xl bg-forno border border-stone-700 px-3 py-2 text-xs text-pergaminho">
-                <option value="Tradicional Italiana|0">Borda Tradicional</option>
-                <option value="Catupiry Original|12">Borda Catupiry (+R$12)</option>
-                <option value="Cheddar Cremoso|10">Borda Cheddar (+R$10)</option>
-              </select>
-            </div>
-
-            <div class="text-2xl font-serif-it font-bold text-dourado" id="half-total-price">R$&nbsp;82,00</div>
-
-            <button id="btn-add-half-pizza" type="button" class="w-full py-3 px-5 rounded-xl bg-terracota hover:bg-red-700 text-white text-xs sm:text-sm font-semibold shadow-lg transition active:scale-95">
-              + Adicionar Meio a Meio ao Pedido
-            </button>
-          </div>
-        </div>
-
-        <!-- Metade Direita -->
-        <div data-studio-box="Metade Direita Meio a Meio" class="lg:col-span-4 rounded-2xl bg-forno border border-stone-800 p-5 space-y-4" data-move-bound="1">
-          <span class="text-xs uppercase tracking-wider text-dourado font-semibold">2ª Metade (Direita)</span>
-          <select id="half-right-select" class="w-full rounded-xl bg-carvao border border-stone-700 px-3.5 py-2.5 text-sm text-pergaminho focus:outline-none focus:border-dourado"><option value="0">4 Queijos — R$&nbsp;82,00</option><option value="1">Frango Catupiry — R$&nbsp;78,00</option><option value="2">Portuguesa — R$&nbsp;76,00</option><option value="3">Margherita Verace — R$&nbsp;68,00</option><option value="4">Pepperoni Diavola — R$&nbsp;79,00</option><option value="5">Chocolate com Morango — R$&nbsp;74,00</option></select>
-          <p id="half-right-desc" class="text-xs text-stone-400 leading-relaxed min-h-[48px]">Peito de frango desfiado temperado com ervas finas, coberto com espiral generosa do legítimo Catupiry cremoso e azeitonas.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  nbsp;79,00</option><option value="5">Chocolate com Morango — R<!-- ==================== CONSTRUTOR MEIO A MEIO ==================== -->
-  <section id="meio-a-meio" data-studio-box="Seção Meio a Meio" class="py-8 sm:py-10 bg-carvao border-b border-stone-800/80" data-move-bound="1">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div data-studio-box="Título Meio a Meio" class="text-center max-w-2xl mx-auto mb-6" data-move-bound="1">
-        <span class="text-xs uppercase tracking-[0.24em] text-dourado font-semibold">Dois Sabores em Uma</span>
-        <h2 class="font-serif-it text-3xl sm:text-5xl font-bold text-pergaminho mt-1">Monte sua Pizza Meio a Meio</h2>
-        <p class="text-sm text-stone-300 mt-2">Combine duas metades artesanais e visualize o resultado na hora. O valor considera o sabor de maior valor entre os escolhidos.</p>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-        <!-- Metade Esquerda -->
-        <div data-studio-box="Metade Esquerda Meio a Meio" class="lg:col-span-4 rounded-2xl bg-forno border border-stone-800 p-5 space-y-4" data-move-bound="1">
-          <span class="text-xs uppercase tracking-wider text-dourado font-semibold">1ª Metade (Esquerda)</span>
-          <select id="half-left-select" class="w-full rounded-xl bg-carvao border border-stone-700 px-3.5 py-2.5 text-sm text-pergaminho focus:outline-none focus:border-dourado"><option value="0">4 Queijos — R$&nbsp;82,00</option><option value="1">Frango Catupiry — R$&nbsp;78,00</option><option value="2">Portuguesa — R$&nbsp;76,00</option><option value="3">Margherita Verace — R$&nbsp;68,00</option><option value="4">Pepperoni Diavola — R$&nbsp;79,00</option><option value="5">Chocolate com Morango — R$&nbsp;74,00</option></select>
-          <p id="half-left-desc" class="text-xs text-stone-400 leading-relaxed min-h-[48px]">Harmonização cremosa de muçarela fresca, gorgonzola italiano, provolone defumado e parmesão maturado gratinado no forno a lenha.</p>
-        </div>
-
-        <!-- Disco Visual Central -->
-        <div data-studio-box="Disco Central Meio a Meio" class="lg:col-span-4 flex flex-col items-center justify-center space-y-4" data-move-bound="1">
-          <div class="half-half-disc w-[230px] h-[230px] sm:w-[270px] sm:h-[270px] bg-forno">
-            <img id="half-left-img" src="blob:null/8c0a9f44-429d-4763-8db6-83b22900a1bc" alt="Metade Esquerda" class="absolute inset-0 w-full h-full object-cover half-left-clip">
-            <img id="half-right-img" src="blob:null/1bcf9adb-116c-45d5-9906-a20d0057b3e3" alt="Metade Direita" class="absolute inset-0 w-full h-full object-cover half-right-clip">
-            <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 w-[2px] bg-dourado/70 shadow"></div>
-          </div>
-
-          <div class="w-full max-w-xs space-y-3 text-center">
-            <div class="flex items-center justify-center gap-2">
-              <select id="half-size-select" class="rounded-xl bg-forno border border-stone-700 px-3 py-2 text-xs text-pergaminho">
-                <option value="Grande (8 fatias)|1">Grande (8 fatias)</option>
-                <option value="Família (12 fatias)|1.28">Família (12 fatias)</option>
-              </select>
-              <select id="half-crust-select" class="rounded-xl bg-forno border border-stone-700 px-3 py-2 text-xs text-pergaminho">
-                <option value="Tradicional Italiana|0">Borda Tradicional</option>
-                <option value="Catupiry Original|12">Borda Catupiry (+R$12)</option>
-                <option value="Cheddar Cremoso|10">Borda Cheddar (+R$10)</option>
-              </select>
-            </div>
-
-            <div class="text-2xl font-serif-it font-bold text-dourado" id="half-total-price">R$&nbsp;82,00</div>
-
-            <button id="btn-add-half-pizza" type="button" class="w-full py-3 px-5 rounded-xl bg-terracota hover:bg-red-700 text-white text-xs sm:text-sm font-semibold shadow-lg transition active:scale-95">
-              + Adicionar Meio a Meio ao Pedido
-            </button>
-          </div>
-        </div>
-
-        <!-- Metade Direita -->
-        <div data-studio-box="Metade Direita Meio a Meio" class="lg:col-span-4 rounded-2xl bg-forno border border-stone-800 p-5 space-y-4" data-move-bound="1">
-          <span class="text-xs uppercase tracking-wider text-dourado font-semibold">2ª Metade (Direita)</span>
-          <select id="half-right-select" class="w-full rounded-xl bg-carvao border border-stone-700 px-3.5 py-2.5 text-sm text-pergaminho focus:outline-none focus:border-dourado"><option value="0">4 Queijos — R$&nbsp;82,00</option><option value="1">Frango Catupiry — R$&nbsp;78,00</option><option value="2">Portuguesa — R$&nbsp;76,00</option><option value="3">Margherita Verace — R$&nbsp;68,00</option><option value="4">Pepperoni Diavola — R$&nbsp;79,00</option><option value="5">Chocolate com Morango — R$&nbsp;74,00</option></select>
-          <p id="half-right-desc" class="text-xs text-stone-400 leading-relaxed min-h-[48px]">Peito de frango desfiado temperado com ervas finas, coberto com espiral generosa do legítimo Catupiry cremoso e azeitonas.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  nbsp;74,00</option></select>
-          <p id="half-left-desc" class="text-xs text-stone-400 leading-relaxed min-h-[40px]">Harmonização cremosa de muçarela fresca, gorgonzola italiano, provolone defumado e parmesão maturado gratinado no forno a lenha.</p>
-        </div>
-        <div data-studio-box="Segunda Metade" class="rounded-2xl bg-forno border border-stone-800 p-4 sm:p-5 space-y-3" data-move-bound="1">
+        <div data-studio-box="Segunda Metade" class="rounded-2xl bg-forno border border-stone-800 p-4 sm:p-5 space-y-3">
           <div class="flex items-center gap-3">
             <span class="flex items-center justify-center w-8 h-8 rounded-full bg-dourado text-espresso font-bold">2</span>
             <div><p class="text-xs uppercase tracking-wider text-dourado font-semibold">Segunda etapa</p><h3 class="text-pergaminho font-semibold">Escolha a 2ª metade</h3></div>
           </div>
-          <select id="half-right-select" class="w-full rounded-xl bg-carvao border border-stone-700 px-3.5 py-3 text-sm text-pergaminho focus:outline-none focus:border-dourado"><option value="0">4 Queijos — R<!-- ==================== CONSTRUTOR MEIO A MEIO ==================== -->
-  <section id="meio-a-meio" data-studio-box="Seção Meio a Meio" class="py-8 sm:py-10 bg-carvao border-b border-stone-800/80" data-move-bound="1">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div data-studio-box="Título Meio a Meio" class="text-center max-w-2xl mx-auto mb-6" data-move-bound="1">
-        <span class="text-xs uppercase tracking-[0.24em] text-dourado font-semibold">Dois Sabores em Uma</span>
-        <h2 class="font-serif-it text-3xl sm:text-5xl font-bold text-pergaminho mt-1">Monte sua Pizza Meio a Meio</h2>
-        <p class="text-sm text-stone-300 mt-2">Combine duas metades artesanais e visualize o resultado na hora. O valor considera o sabor de maior valor entre os escolhidos.</p>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-        <!-- Metade Esquerda -->
-        <div data-studio-box="Metade Esquerda Meio a Meio" class="lg:col-span-4 rounded-2xl bg-forno border border-stone-800 p-5 space-y-4" data-move-bound="1">
-          <span class="text-xs uppercase tracking-wider text-dourado font-semibold">1ª Metade (Esquerda)</span>
-          <select id="half-left-select" class="w-full rounded-xl bg-carvao border border-stone-700 px-3.5 py-2.5 text-sm text-pergaminho focus:outline-none focus:border-dourado"><option value="0">4 Queijos — R$&nbsp;82,00</option><option value="1">Frango Catupiry — R$&nbsp;78,00</option><option value="2">Portuguesa — R$&nbsp;76,00</option><option value="3">Margherita Verace — R$&nbsp;68,00</option><option value="4">Pepperoni Diavola — R$&nbsp;79,00</option><option value="5">Chocolate com Morango — R$&nbsp;74,00</option></select>
-          <p id="half-left-desc" class="text-xs text-stone-400 leading-relaxed min-h-[48px]">Harmonização cremosa de muçarela fresca, gorgonzola italiano, provolone defumado e parmesão maturado gratinado no forno a lenha.</p>
-        </div>
-
-        <!-- Disco Visual Central -->
-        <div data-studio-box="Disco Central Meio a Meio" class="lg:col-span-4 flex flex-col items-center justify-center space-y-4" data-move-bound="1">
-          <div class="half-half-disc w-[230px] h-[230px] sm:w-[270px] sm:h-[270px] bg-forno">
-            <img id="half-left-img" src="blob:null/8c0a9f44-429d-4763-8db6-83b22900a1bc" alt="Metade Esquerda" class="absolute inset-0 w-full h-full object-cover half-left-clip">
-            <img id="half-right-img" src="blob:null/1bcf9adb-116c-45d5-9906-a20d0057b3e3" alt="Metade Direita" class="absolute inset-0 w-full h-full object-cover half-right-clip">
-            <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 w-[2px] bg-dourado/70 shadow"></div>
-          </div>
-
-          <div class="w-full max-w-xs space-y-3 text-center">
-            <div class="flex items-center justify-center gap-2">
-              <select id="half-size-select" class="rounded-xl bg-forno border border-stone-700 px-3 py-2 text-xs text-pergaminho">
-                <option value="Grande (8 fatias)|1">Grande (8 fatias)</option>
-                <option value="Família (12 fatias)|1.28">Família (12 fatias)</option>
-              </select>
-              <select id="half-crust-select" class="rounded-xl bg-forno border border-stone-700 px-3 py-2 text-xs text-pergaminho">
-                <option value="Tradicional Italiana|0">Borda Tradicional</option>
-                <option value="Catupiry Original|12">Borda Catupiry (+R$12)</option>
-                <option value="Cheddar Cremoso|10">Borda Cheddar (+R$10)</option>
-              </select>
-            </div>
-
-            <div class="text-2xl font-serif-it font-bold text-dourado" id="half-total-price">R$&nbsp;82,00</div>
-
-            <button id="btn-add-half-pizza" type="button" class="w-full py-3 px-5 rounded-xl bg-terracota hover:bg-red-700 text-white text-xs sm:text-sm font-semibold shadow-lg transition active:scale-95">
-              + Adicionar Meio a Meio ao Pedido
-            </button>
-          </div>
-        </div>
-
-        <!-- Metade Direita -->
-        <div data-studio-box="Metade Direita Meio a Meio" class="lg:col-span-4 rounded-2xl bg-forno border border-stone-800 p-5 space-y-4" data-move-bound="1">
-          <span class="text-xs uppercase tracking-wider text-dourado font-semibold">2ª Metade (Direita)</span>
-          <select id="half-right-select" class="w-full rounded-xl bg-carvao border border-stone-700 px-3.5 py-2.5 text-sm text-pergaminho focus:outline-none focus:border-dourado"><option value="0">4 Queijos — R$&nbsp;82,00</option><option value="1">Frango Catupiry — R$&nbsp;78,00</option><option value="2">Portuguesa — R$&nbsp;76,00</option><option value="3">Margherita Verace — R$&nbsp;68,00</option><option value="4">Pepperoni Diavola — R$&nbsp;79,00</option><option value="5">Chocolate com Morango — R$&nbsp;74,00</option></select>
-          <p id="half-right-desc" class="text-xs text-stone-400 leading-relaxed min-h-[48px]">Peito de frango desfiado temperado com ervas finas, coberto com espiral generosa do legítimo Catupiry cremoso e azeitonas.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  nbsp;82,00</option><option value="1">Frango Catupiry — R<!-- ==================== CONSTRUTOR MEIO A MEIO ==================== -->
-  <section id="meio-a-meio" data-studio-box="Seção Meio a Meio" class="py-8 sm:py-10 bg-carvao border-b border-stone-800/80" data-move-bound="1">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div data-studio-box="Título Meio a Meio" class="text-center max-w-2xl mx-auto mb-6" data-move-bound="1">
-        <span class="text-xs uppercase tracking-[0.24em] text-dourado font-semibold">Dois Sabores em Uma</span>
-        <h2 class="font-serif-it text-3xl sm:text-5xl font-bold text-pergaminho mt-1">Monte sua Pizza Meio a Meio</h2>
-        <p class="text-sm text-stone-300 mt-2">Combine duas metades artesanais e visualize o resultado na hora. O valor considera o sabor de maior valor entre os escolhidos.</p>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-        <!-- Metade Esquerda -->
-        <div data-studio-box="Metade Esquerda Meio a Meio" class="lg:col-span-4 rounded-2xl bg-forno border border-stone-800 p-5 space-y-4" data-move-bound="1">
-          <span class="text-xs uppercase tracking-wider text-dourado font-semibold">1ª Metade (Esquerda)</span>
-          <select id="half-left-select" class="w-full rounded-xl bg-carvao border border-stone-700 px-3.5 py-2.5 text-sm text-pergaminho focus:outline-none focus:border-dourado"><option value="0">4 Queijos — R$&nbsp;82,00</option><option value="1">Frango Catupiry — R$&nbsp;78,00</option><option value="2">Portuguesa — R$&nbsp;76,00</option><option value="3">Margherita Verace — R$&nbsp;68,00</option><option value="4">Pepperoni Diavola — R$&nbsp;79,00</option><option value="5">Chocolate com Morango — R$&nbsp;74,00</option></select>
-          <p id="half-left-desc" class="text-xs text-stone-400 leading-relaxed min-h-[48px]">Harmonização cremosa de muçarela fresca, gorgonzola italiano, provolone defumado e parmesão maturado gratinado no forno a lenha.</p>
-        </div>
-
-        <!-- Disco Visual Central -->
-        <div data-studio-box="Disco Central Meio a Meio" class="lg:col-span-4 flex flex-col items-center justify-center space-y-4" data-move-bound="1">
-          <div class="half-half-disc w-[230px] h-[230px] sm:w-[270px] sm:h-[270px] bg-forno">
-            <img id="half-left-img" src="blob:null/8c0a9f44-429d-4763-8db6-83b22900a1bc" alt="Metade Esquerda" class="absolute inset-0 w-full h-full object-cover half-left-clip">
-            <img id="half-right-img" src="blob:null/1bcf9adb-116c-45d5-9906-a20d0057b3e3" alt="Metade Direita" class="absolute inset-0 w-full h-full object-cover half-right-clip">
-            <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 w-[2px] bg-dourado/70 shadow"></div>
-          </div>
-
-          <div class="w-full max-w-xs space-y-3 text-center">
-            <div class="flex items-center justify-center gap-2">
-              <select id="half-size-select" class="rounded-xl bg-forno border border-stone-700 px-3 py-2 text-xs text-pergaminho">
-                <option value="Grande (8 fatias)|1">Grande (8 fatias)</option>
-                <option value="Família (12 fatias)|1.28">Família (12 fatias)</option>
-              </select>
-              <select id="half-crust-select" class="rounded-xl bg-forno border border-stone-700 px-3 py-2 text-xs text-pergaminho">
-                <option value="Tradicional Italiana|0">Borda Tradicional</option>
-                <option value="Catupiry Original|12">Borda Catupiry (+R$12)</option>
-                <option value="Cheddar Cremoso|10">Borda Cheddar (+R$10)</option>
-              </select>
-            </div>
-
-            <div class="text-2xl font-serif-it font-bold text-dourado" id="half-total-price">R$&nbsp;82,00</div>
-
-            <button id="btn-add-half-pizza" type="button" class="w-full py-3 px-5 rounded-xl bg-terracota hover:bg-red-700 text-white text-xs sm:text-sm font-semibold shadow-lg transition active:scale-95">
-              + Adicionar Meio a Meio ao Pedido
-            </button>
-          </div>
-        </div>
-
-        <!-- Metade Direita -->
-        <div data-studio-box="Metade Direita Meio a Meio" class="lg:col-span-4 rounded-2xl bg-forno border border-stone-800 p-5 space-y-4" data-move-bound="1">
-          <span class="text-xs uppercase tracking-wider text-dourado font-semibold">2ª Metade (Direita)</span>
-          <select id="half-right-select" class="w-full rounded-xl bg-carvao border border-stone-700 px-3.5 py-2.5 text-sm text-pergaminho focus:outline-none focus:border-dourado"><option value="0">4 Queijos — R$&nbsp;82,00</option><option value="1">Frango Catupiry — R$&nbsp;78,00</option><option value="2">Portuguesa — R$&nbsp;76,00</option><option value="3">Margherita Verace — R$&nbsp;68,00</option><option value="4">Pepperoni Diavola — R$&nbsp;79,00</option><option value="5">Chocolate com Morango — R$&nbsp;74,00</option></select>
-          <p id="half-right-desc" class="text-xs text-stone-400 leading-relaxed min-h-[48px]">Peito de frango desfiado temperado com ervas finas, coberto com espiral generosa do legítimo Catupiry cremoso e azeitonas.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  nbsp;78,00</option><option value="2">Portuguesa — R<!-- ==================== CONSTRUTOR MEIO A MEIO ==================== -->
-  <section id="meio-a-meio" data-studio-box="Seção Meio a Meio" class="py-8 sm:py-10 bg-carvao border-b border-stone-800/80" data-move-bound="1">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div data-studio-box="Título Meio a Meio" class="text-center max-w-2xl mx-auto mb-6" data-move-bound="1">
-        <span class="text-xs uppercase tracking-[0.24em] text-dourado font-semibold">Dois Sabores em Uma</span>
-        <h2 class="font-serif-it text-3xl sm:text-5xl font-bold text-pergaminho mt-1">Monte sua Pizza Meio a Meio</h2>
-        <p class="text-sm text-stone-300 mt-2">Combine duas metades artesanais e visualize o resultado na hora. O valor considera o sabor de maior valor entre os escolhidos.</p>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-        <!-- Metade Esquerda -->
-        <div data-studio-box="Metade Esquerda Meio a Meio" class="lg:col-span-4 rounded-2xl bg-forno border border-stone-800 p-5 space-y-4" data-move-bound="1">
-          <span class="text-xs uppercase tracking-wider text-dourado font-semibold">1ª Metade (Esquerda)</span>
-          <select id="half-left-select" class="w-full rounded-xl bg-carvao border border-stone-700 px-3.5 py-2.5 text-sm text-pergaminho focus:outline-none focus:border-dourado"><option value="0">4 Queijos — R$&nbsp;82,00</option><option value="1">Frango Catupiry — R$&nbsp;78,00</option><option value="2">Portuguesa — R$&nbsp;76,00</option><option value="3">Margherita Verace — R$&nbsp;68,00</option><option value="4">Pepperoni Diavola — R$&nbsp;79,00</option><option value="5">Chocolate com Morango — R$&nbsp;74,00</option></select>
-          <p id="half-left-desc" class="text-xs text-stone-400 leading-relaxed min-h-[48px]">Harmonização cremosa de muçarela fresca, gorgonzola italiano, provolone defumado e parmesão maturado gratinado no forno a lenha.</p>
-        </div>
-
-        <!-- Disco Visual Central -->
-        <div data-studio-box="Disco Central Meio a Meio" class="lg:col-span-4 flex flex-col items-center justify-center space-y-4" data-move-bound="1">
-          <div class="half-half-disc w-[230px] h-[230px] sm:w-[270px] sm:h-[270px] bg-forno">
-            <img id="half-left-img" src="blob:null/8c0a9f44-429d-4763-8db6-83b22900a1bc" alt="Metade Esquerda" class="absolute inset-0 w-full h-full object-cover half-left-clip">
-            <img id="half-right-img" src="blob:null/1bcf9adb-116c-45d5-9906-a20d0057b3e3" alt="Metade Direita" class="absolute inset-0 w-full h-full object-cover half-right-clip">
-            <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 w-[2px] bg-dourado/70 shadow"></div>
-          </div>
-
-          <div class="w-full max-w-xs space-y-3 text-center">
-            <div class="flex items-center justify-center gap-2">
-              <select id="half-size-select" class="rounded-xl bg-forno border border-stone-700 px-3 py-2 text-xs text-pergaminho">
-                <option value="Grande (8 fatias)|1">Grande (8 fatias)</option>
-                <option value="Família (12 fatias)|1.28">Família (12 fatias)</option>
-              </select>
-              <select id="half-crust-select" class="rounded-xl bg-forno border border-stone-700 px-3 py-2 text-xs text-pergaminho">
-                <option value="Tradicional Italiana|0">Borda Tradicional</option>
-                <option value="Catupiry Original|12">Borda Catupiry (+R$12)</option>
-                <option value="Cheddar Cremoso|10">Borda Cheddar (+R$10)</option>
-              </select>
-            </div>
-
-            <div class="text-2xl font-serif-it font-bold text-dourado" id="half-total-price">R$&nbsp;82,00</div>
-
-            <button id="btn-add-half-pizza" type="button" class="w-full py-3 px-5 rounded-xl bg-terracota hover:bg-red-700 text-white text-xs sm:text-sm font-semibold shadow-lg transition active:scale-95">
-              + Adicionar Meio a Meio ao Pedido
-            </button>
-          </div>
-        </div>
-
-        <!-- Metade Direita -->
-        <div data-studio-box="Metade Direita Meio a Meio" class="lg:col-span-4 rounded-2xl bg-forno border border-stone-800 p-5 space-y-4" data-move-bound="1">
-          <span class="text-xs uppercase tracking-wider text-dourado font-semibold">2ª Metade (Direita)</span>
-          <select id="half-right-select" class="w-full rounded-xl bg-carvao border border-stone-700 px-3.5 py-2.5 text-sm text-pergaminho focus:outline-none focus:border-dourado"><option value="0">4 Queijos — R$&nbsp;82,00</option><option value="1">Frango Catupiry — R$&nbsp;78,00</option><option value="2">Portuguesa — R$&nbsp;76,00</option><option value="3">Margherita Verace — R$&nbsp;68,00</option><option value="4">Pepperoni Diavola — R$&nbsp;79,00</option><option value="5">Chocolate com Morango — R$&nbsp;74,00</option></select>
-          <p id="half-right-desc" class="text-xs text-stone-400 leading-relaxed min-h-[48px]">Peito de frango desfiado temperado com ervas finas, coberto com espiral generosa do legítimo Catupiry cremoso e azeitonas.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  nbsp;76,00</option><option value="3">Margherita Verace — R<!-- ==================== CONSTRUTOR MEIO A MEIO ==================== -->
-  <section id="meio-a-meio" data-studio-box="Seção Meio a Meio" class="py-8 sm:py-10 bg-carvao border-b border-stone-800/80" data-move-bound="1">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div data-studio-box="Título Meio a Meio" class="text-center max-w-2xl mx-auto mb-6" data-move-bound="1">
-        <span class="text-xs uppercase tracking-[0.24em] text-dourado font-semibold">Dois Sabores em Uma</span>
-        <h2 class="font-serif-it text-3xl sm:text-5xl font-bold text-pergaminho mt-1">Monte sua Pizza Meio a Meio</h2>
-        <p class="text-sm text-stone-300 mt-2">Combine duas metades artesanais e visualize o resultado na hora. O valor considera o sabor de maior valor entre os escolhidos.</p>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-        <!-- Metade Esquerda -->
-        <div data-studio-box="Metade Esquerda Meio a Meio" class="lg:col-span-4 rounded-2xl bg-forno border border-stone-800 p-5 space-y-4" data-move-bound="1">
-          <span class="text-xs uppercase tracking-wider text-dourado font-semibold">1ª Metade (Esquerda)</span>
-          <select id="half-left-select" class="w-full rounded-xl bg-carvao border border-stone-700 px-3.5 py-2.5 text-sm text-pergaminho focus:outline-none focus:border-dourado"><option value="0">4 Queijos — R$&nbsp;82,00</option><option value="1">Frango Catupiry — R$&nbsp;78,00</option><option value="2">Portuguesa — R$&nbsp;76,00</option><option value="3">Margherita Verace — R$&nbsp;68,00</option><option value="4">Pepperoni Diavola — R$&nbsp;79,00</option><option value="5">Chocolate com Morango — R$&nbsp;74,00</option></select>
-          <p id="half-left-desc" class="text-xs text-stone-400 leading-relaxed min-h-[48px]">Harmonização cremosa de muçarela fresca, gorgonzola italiano, provolone defumado e parmesão maturado gratinado no forno a lenha.</p>
-        </div>
-
-        <!-- Disco Visual Central -->
-        <div data-studio-box="Disco Central Meio a Meio" class="lg:col-span-4 flex flex-col items-center justify-center space-y-4" data-move-bound="1">
-          <div class="half-half-disc w-[230px] h-[230px] sm:w-[270px] sm:h-[270px] bg-forno">
-            <img id="half-left-img" src="blob:null/8c0a9f44-429d-4763-8db6-83b22900a1bc" alt="Metade Esquerda" class="absolute inset-0 w-full h-full object-cover half-left-clip">
-            <img id="half-right-img" src="blob:null/1bcf9adb-116c-45d5-9906-a20d0057b3e3" alt="Metade Direita" class="absolute inset-0 w-full h-full object-cover half-right-clip">
-            <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 w-[2px] bg-dourado/70 shadow"></div>
-          </div>
-
-          <div class="w-full max-w-xs space-y-3 text-center">
-            <div class="flex items-center justify-center gap-2">
-              <select id="half-size-select" class="rounded-xl bg-forno border border-stone-700 px-3 py-2 text-xs text-pergaminho">
-                <option value="Grande (8 fatias)|1">Grande (8 fatias)</option>
-                <option value="Família (12 fatias)|1.28">Família (12 fatias)</option>
-              </select>
-              <select id="half-crust-select" class="rounded-xl bg-forno border border-stone-700 px-3 py-2 text-xs text-pergaminho">
-                <option value="Tradicional Italiana|0">Borda Tradicional</option>
-                <option value="Catupiry Original|12">Borda Catupiry (+R$12)</option>
-                <option value="Cheddar Cremoso|10">Borda Cheddar (+R$10)</option>
-              </select>
-            </div>
-
-            <div class="text-2xl font-serif-it font-bold text-dourado" id="half-total-price">R$&nbsp;82,00</div>
-
-            <button id="btn-add-half-pizza" type="button" class="w-full py-3 px-5 rounded-xl bg-terracota hover:bg-red-700 text-white text-xs sm:text-sm font-semibold shadow-lg transition active:scale-95">
-              + Adicionar Meio a Meio ao Pedido
-            </button>
-          </div>
-        </div>
-
-        <!-- Metade Direita -->
-        <div data-studio-box="Metade Direita Meio a Meio" class="lg:col-span-4 rounded-2xl bg-forno border border-stone-800 p-5 space-y-4" data-move-bound="1">
-          <span class="text-xs uppercase tracking-wider text-dourado font-semibold">2ª Metade (Direita)</span>
-          <select id="half-right-select" class="w-full rounded-xl bg-carvao border border-stone-700 px-3.5 py-2.5 text-sm text-pergaminho focus:outline-none focus:border-dourado"><option value="0">4 Queijos — R$&nbsp;82,00</option><option value="1">Frango Catupiry — R$&nbsp;78,00</option><option value="2">Portuguesa — R$&nbsp;76,00</option><option value="3">Margherita Verace — R$&nbsp;68,00</option><option value="4">Pepperoni Diavola — R$&nbsp;79,00</option><option value="5">Chocolate com Morango — R$&nbsp;74,00</option></select>
-          <p id="half-right-desc" class="text-xs text-stone-400 leading-relaxed min-h-[48px]">Peito de frango desfiado temperado com ervas finas, coberto com espiral generosa do legítimo Catupiry cremoso e azeitonas.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  nbsp;68,00</option><option value="4">Pepperoni Diavola — R<!-- ==================== CONSTRUTOR MEIO A MEIO ==================== -->
-  <section id="meio-a-meio" data-studio-box="Seção Meio a Meio" class="py-8 sm:py-10 bg-carvao border-b border-stone-800/80" data-move-bound="1">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div data-studio-box="Título Meio a Meio" class="text-center max-w-2xl mx-auto mb-6" data-move-bound="1">
-        <span class="text-xs uppercase tracking-[0.24em] text-dourado font-semibold">Dois Sabores em Uma</span>
-        <h2 class="font-serif-it text-3xl sm:text-5xl font-bold text-pergaminho mt-1">Monte sua Pizza Meio a Meio</h2>
-        <p class="text-sm text-stone-300 mt-2">Combine duas metades artesanais e visualize o resultado na hora. O valor considera o sabor de maior valor entre os escolhidos.</p>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-        <!-- Metade Esquerda -->
-        <div data-studio-box="Metade Esquerda Meio a Meio" class="lg:col-span-4 rounded-2xl bg-forno border border-stone-800 p-5 space-y-4" data-move-bound="1">
-          <span class="text-xs uppercase tracking-wider text-dourado font-semibold">1ª Metade (Esquerda)</span>
-          <select id="half-left-select" class="w-full rounded-xl bg-carvao border border-stone-700 px-3.5 py-2.5 text-sm text-pergaminho focus:outline-none focus:border-dourado"><option value="0">4 Queijos — R$&nbsp;82,00</option><option value="1">Frango Catupiry — R$&nbsp;78,00</option><option value="2">Portuguesa — R$&nbsp;76,00</option><option value="3">Margherita Verace — R$&nbsp;68,00</option><option value="4">Pepperoni Diavola — R$&nbsp;79,00</option><option value="5">Chocolate com Morango — R$&nbsp;74,00</option></select>
-          <p id="half-left-desc" class="text-xs text-stone-400 leading-relaxed min-h-[48px]">Harmonização cremosa de muçarela fresca, gorgonzola italiano, provolone defumado e parmesão maturado gratinado no forno a lenha.</p>
-        </div>
-
-        <!-- Disco Visual Central -->
-        <div data-studio-box="Disco Central Meio a Meio" class="lg:col-span-4 flex flex-col items-center justify-center space-y-4" data-move-bound="1">
-          <div class="half-half-disc w-[230px] h-[230px] sm:w-[270px] sm:h-[270px] bg-forno">
-            <img id="half-left-img" src="blob:null/8c0a9f44-429d-4763-8db6-83b22900a1bc" alt="Metade Esquerda" class="absolute inset-0 w-full h-full object-cover half-left-clip">
-            <img id="half-right-img" src="blob:null/1bcf9adb-116c-45d5-9906-a20d0057b3e3" alt="Metade Direita" class="absolute inset-0 w-full h-full object-cover half-right-clip">
-            <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 w-[2px] bg-dourado/70 shadow"></div>
-          </div>
-
-          <div class="w-full max-w-xs space-y-3 text-center">
-            <div class="flex items-center justify-center gap-2">
-              <select id="half-size-select" class="rounded-xl bg-forno border border-stone-700 px-3 py-2 text-xs text-pergaminho">
-                <option value="Grande (8 fatias)|1">Grande (8 fatias)</option>
-                <option value="Família (12 fatias)|1.28">Família (12 fatias)</option>
-              </select>
-              <select id="half-crust-select" class="rounded-xl bg-forno border border-stone-700 px-3 py-2 text-xs text-pergaminho">
-                <option value="Tradicional Italiana|0">Borda Tradicional</option>
-                <option value="Catupiry Original|12">Borda Catupiry (+R$12)</option>
-                <option value="Cheddar Cremoso|10">Borda Cheddar (+R$10)</option>
-              </select>
-            </div>
-
-            <div class="text-2xl font-serif-it font-bold text-dourado" id="half-total-price">R$&nbsp;82,00</div>
-
-            <button id="btn-add-half-pizza" type="button" class="w-full py-3 px-5 rounded-xl bg-terracota hover:bg-red-700 text-white text-xs sm:text-sm font-semibold shadow-lg transition active:scale-95">
-              + Adicionar Meio a Meio ao Pedido
-            </button>
-          </div>
-        </div>
-
-        <!-- Metade Direita -->
-        <div data-studio-box="Metade Direita Meio a Meio" class="lg:col-span-4 rounded-2xl bg-forno border border-stone-800 p-5 space-y-4" data-move-bound="1">
-          <span class="text-xs uppercase tracking-wider text-dourado font-semibold">2ª Metade (Direita)</span>
-          <select id="half-right-select" class="w-full rounded-xl bg-carvao border border-stone-700 px-3.5 py-2.5 text-sm text-pergaminho focus:outline-none focus:border-dourado"><option value="0">4 Queijos — R$&nbsp;82,00</option><option value="1">Frango Catupiry — R$&nbsp;78,00</option><option value="2">Portuguesa — R$&nbsp;76,00</option><option value="3">Margherita Verace — R$&nbsp;68,00</option><option value="4">Pepperoni Diavola — R$&nbsp;79,00</option><option value="5">Chocolate com Morango — R$&nbsp;74,00</option></select>
-          <p id="half-right-desc" class="text-xs text-stone-400 leading-relaxed min-h-[48px]">Peito de frango desfiado temperado com ervas finas, coberto com espiral generosa do legítimo Catupiry cremoso e azeitonas.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  nbsp;79,00</option><option value="5">Chocolate com Morango — R<!-- ==================== CONSTRUTOR MEIO A MEIO ==================== -->
-  <section id="meio-a-meio" data-studio-box="Seção Meio a Meio" class="py-8 sm:py-10 bg-carvao border-b border-stone-800/80" data-move-bound="1">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div data-studio-box="Título Meio a Meio" class="text-center max-w-2xl mx-auto mb-6" data-move-bound="1">
-        <span class="text-xs uppercase tracking-[0.24em] text-dourado font-semibold">Dois Sabores em Uma</span>
-        <h2 class="font-serif-it text-3xl sm:text-5xl font-bold text-pergaminho mt-1">Monte sua Pizza Meio a Meio</h2>
-        <p class="text-sm text-stone-300 mt-2">Combine duas metades artesanais e visualize o resultado na hora. O valor considera o sabor de maior valor entre os escolhidos.</p>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-        <!-- Metade Esquerda -->
-        <div data-studio-box="Metade Esquerda Meio a Meio" class="lg:col-span-4 rounded-2xl bg-forno border border-stone-800 p-5 space-y-4" data-move-bound="1">
-          <span class="text-xs uppercase tracking-wider text-dourado font-semibold">1ª Metade (Esquerda)</span>
-          <select id="half-left-select" class="w-full rounded-xl bg-carvao border border-stone-700 px-3.5 py-2.5 text-sm text-pergaminho focus:outline-none focus:border-dourado"><option value="0">4 Queijos — R$&nbsp;82,00</option><option value="1">Frango Catupiry — R$&nbsp;78,00</option><option value="2">Portuguesa — R$&nbsp;76,00</option><option value="3">Margherita Verace — R$&nbsp;68,00</option><option value="4">Pepperoni Diavola — R$&nbsp;79,00</option><option value="5">Chocolate com Morango — R$&nbsp;74,00</option></select>
-          <p id="half-left-desc" class="text-xs text-stone-400 leading-relaxed min-h-[48px]">Harmonização cremosa de muçarela fresca, gorgonzola italiano, provolone defumado e parmesão maturado gratinado no forno a lenha.</p>
-        </div>
-
-        <!-- Disco Visual Central -->
-        <div data-studio-box="Disco Central Meio a Meio" class="lg:col-span-4 flex flex-col items-center justify-center space-y-4" data-move-bound="1">
-          <div class="half-half-disc w-[230px] h-[230px] sm:w-[270px] sm:h-[270px] bg-forno">
-            <img id="half-left-img" src="blob:null/8c0a9f44-429d-4763-8db6-83b22900a1bc" alt="Metade Esquerda" class="absolute inset-0 w-full h-full object-cover half-left-clip">
-            <img id="half-right-img" src="blob:null/1bcf9adb-116c-45d5-9906-a20d0057b3e3" alt="Metade Direita" class="absolute inset-0 w-full h-full object-cover half-right-clip">
-            <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 w-[2px] bg-dourado/70 shadow"></div>
-          </div>
-
-          <div class="w-full max-w-xs space-y-3 text-center">
-            <div class="flex items-center justify-center gap-2">
-              <select id="half-size-select" class="rounded-xl bg-forno border border-stone-700 px-3 py-2 text-xs text-pergaminho">
-                <option value="Grande (8 fatias)|1">Grande (8 fatias)</option>
-                <option value="Família (12 fatias)|1.28">Família (12 fatias)</option>
-              </select>
-              <select id="half-crust-select" class="rounded-xl bg-forno border border-stone-700 px-3 py-2 text-xs text-pergaminho">
-                <option value="Tradicional Italiana|0">Borda Tradicional</option>
-                <option value="Catupiry Original|12">Borda Catupiry (+R$12)</option>
-                <option value="Cheddar Cremoso|10">Borda Cheddar (+R$10)</option>
-              </select>
-            </div>
-
-            <div class="text-2xl font-serif-it font-bold text-dourado" id="half-total-price">R$&nbsp;82,00</div>
-
-            <button id="btn-add-half-pizza" type="button" class="w-full py-3 px-5 rounded-xl bg-terracota hover:bg-red-700 text-white text-xs sm:text-sm font-semibold shadow-lg transition active:scale-95">
-              + Adicionar Meio a Meio ao Pedido
-            </button>
-          </div>
-        </div>
-
-        <!-- Metade Direita -->
-        <div data-studio-box="Metade Direita Meio a Meio" class="lg:col-span-4 rounded-2xl bg-forno border border-stone-800 p-5 space-y-4" data-move-bound="1">
-          <span class="text-xs uppercase tracking-wider text-dourado font-semibold">2ª Metade (Direita)</span>
-          <select id="half-right-select" class="w-full rounded-xl bg-carvao border border-stone-700 px-3.5 py-2.5 text-sm text-pergaminho focus:outline-none focus:border-dourado"><option value="0">4 Queijos — R$&nbsp;82,00</option><option value="1">Frango Catupiry — R$&nbsp;78,00</option><option value="2">Portuguesa — R$&nbsp;76,00</option><option value="3">Margherita Verace — R$&nbsp;68,00</option><option value="4">Pepperoni Diavola — R$&nbsp;79,00</option><option value="5">Chocolate com Morango — R$&nbsp;74,00</option></select>
-          <p id="half-right-desc" class="text-xs text-stone-400 leading-relaxed min-h-[48px]">Peito de frango desfiado temperado com ervas finas, coberto com espiral generosa do legítimo Catupiry cremoso e azeitonas.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  nbsp;74,00</option></select>
-          <p id="half-right-desc" class="text-xs text-stone-400 leading-relaxed min-h-[40px]">Peito de frango desfiado temperado com ervas finas, coberto com espiral generosa do legítimo Catupiry cremoso e azeitonas.</p>
+          <select id="half-right-select" class="w-full rounded-xl bg-carvao border border-stone-700 px-3.5 py-3 text-sm text-pergaminho focus:outline-none focus:border-dourado"><option value="1">Carregando sabores...</option></select>
+          <p id="half-right-desc" class="text-xs text-stone-400 leading-relaxed min-h-[42px]"></p>
         </div>
       </div>
 
-      <div data-studio-box="Tamanho e Borda" class="rounded-2xl bg-forno border border-stone-800 p-4 sm:p-5 mb-6" data-move-bound="1">
-        <div class="text-center mb-4"><p class="text-xs uppercase tracking-[0.2em] text-dourado font-semibold">Etapa final</p><h3 class="text-lg font-semibold text-pergaminho">Tamanho e borda</h3></div>
+      <div data-studio-box="Tamanho e Borda" class="rounded-2xl bg-forno border border-stone-800 p-4 sm:p-5 mb-5">
+        <div class="text-center mb-4">
+          <span class="text-xs uppercase tracking-[0.2em] text-dourado font-semibold">Terceira etapa</span>
+          <h3 class="text-lg font-semibold text-pergaminho">Tamanho e borda</h3>
+        </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
           <label class="block text-left"><span class="block text-xs text-stone-300 mb-2 font-medium">Tamanho da pizza</span>
             <select id="half-size-select" class="w-full rounded-xl bg-carvao border border-stone-700 px-3.5 py-3 text-sm text-pergaminho">
@@ -1379,7 +743,7 @@
         </div>
       </div>
 
-      <div data-studio-box="Prévia Meio a Meio" class="flex flex-col items-center justify-center gap-4" data-move-bound="1">
+      <div data-studio-box="Prévia Meio a Meio" class="flex flex-col items-center justify-center gap-4">
         <p class="text-xs uppercase tracking-[0.2em] text-dourado font-semibold">Sua combinação</p>
         <div class="half-half-disc w-[230px] h-[230px] sm:w-[270px] sm:h-[270px] bg-forno">
           <img id="half-left-img" src="blob:null/8c0a9f44-429d-4763-8db6-83b22900a1bc" alt="Metade Esquerda" class="absolute inset-0 w-full h-full object-cover half-left-clip">
@@ -1387,63 +751,7 @@
           <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 w-[2px] bg-dourado/70 shadow"></div>
         </div>
         <div class="w-full max-w-sm space-y-3 text-center">
-          <div class="text-2xl font-serif-it font-bold text-dourado" id="half-total-price">R<!-- ==================== CONSTRUTOR MEIO A MEIO ==================== -->
-  <section id="meio-a-meio" data-studio-box="Seção Meio a Meio" class="py-8 sm:py-10 bg-carvao border-b border-stone-800/80" data-move-bound="1">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div data-studio-box="Título Meio a Meio" class="text-center max-w-2xl mx-auto mb-6" data-move-bound="1">
-        <span class="text-xs uppercase tracking-[0.24em] text-dourado font-semibold">Dois Sabores em Uma</span>
-        <h2 class="font-serif-it text-3xl sm:text-5xl font-bold text-pergaminho mt-1">Monte sua Pizza Meio a Meio</h2>
-        <p class="text-sm text-stone-300 mt-2">Combine duas metades artesanais e visualize o resultado na hora. O valor considera o sabor de maior valor entre os escolhidos.</p>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-        <!-- Metade Esquerda -->
-        <div data-studio-box="Metade Esquerda Meio a Meio" class="lg:col-span-4 rounded-2xl bg-forno border border-stone-800 p-5 space-y-4" data-move-bound="1">
-          <span class="text-xs uppercase tracking-wider text-dourado font-semibold">1ª Metade (Esquerda)</span>
-          <select id="half-left-select" class="w-full rounded-xl bg-carvao border border-stone-700 px-3.5 py-2.5 text-sm text-pergaminho focus:outline-none focus:border-dourado"><option value="0">4 Queijos — R$&nbsp;82,00</option><option value="1">Frango Catupiry — R$&nbsp;78,00</option><option value="2">Portuguesa — R$&nbsp;76,00</option><option value="3">Margherita Verace — R$&nbsp;68,00</option><option value="4">Pepperoni Diavola — R$&nbsp;79,00</option><option value="5">Chocolate com Morango — R$&nbsp;74,00</option></select>
-          <p id="half-left-desc" class="text-xs text-stone-400 leading-relaxed min-h-[48px]">Harmonização cremosa de muçarela fresca, gorgonzola italiano, provolone defumado e parmesão maturado gratinado no forno a lenha.</p>
-        </div>
-
-        <!-- Disco Visual Central -->
-        <div data-studio-box="Disco Central Meio a Meio" class="lg:col-span-4 flex flex-col items-center justify-center space-y-4" data-move-bound="1">
-          <div class="half-half-disc w-[230px] h-[230px] sm:w-[270px] sm:h-[270px] bg-forno">
-            <img id="half-left-img" src="blob:null/8c0a9f44-429d-4763-8db6-83b22900a1bc" alt="Metade Esquerda" class="absolute inset-0 w-full h-full object-cover half-left-clip">
-            <img id="half-right-img" src="blob:null/1bcf9adb-116c-45d5-9906-a20d0057b3e3" alt="Metade Direita" class="absolute inset-0 w-full h-full object-cover half-right-clip">
-            <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 w-[2px] bg-dourado/70 shadow"></div>
-          </div>
-
-          <div class="w-full max-w-xs space-y-3 text-center">
-            <div class="flex items-center justify-center gap-2">
-              <select id="half-size-select" class="rounded-xl bg-forno border border-stone-700 px-3 py-2 text-xs text-pergaminho">
-                <option value="Grande (8 fatias)|1">Grande (8 fatias)</option>
-                <option value="Família (12 fatias)|1.28">Família (12 fatias)</option>
-              </select>
-              <select id="half-crust-select" class="rounded-xl bg-forno border border-stone-700 px-3 py-2 text-xs text-pergaminho">
-                <option value="Tradicional Italiana|0">Borda Tradicional</option>
-                <option value="Catupiry Original|12">Borda Catupiry (+R$12)</option>
-                <option value="Cheddar Cremoso|10">Borda Cheddar (+R$10)</option>
-              </select>
-            </div>
-
-            <div class="text-2xl font-serif-it font-bold text-dourado" id="half-total-price">R$&nbsp;82,00</div>
-
-            <button id="btn-add-half-pizza" type="button" class="w-full py-3 px-5 rounded-xl bg-terracota hover:bg-red-700 text-white text-xs sm:text-sm font-semibold shadow-lg transition active:scale-95">
-              + Adicionar Meio a Meio ao Pedido
-            </button>
-          </div>
-        </div>
-
-        <!-- Metade Direita -->
-        <div data-studio-box="Metade Direita Meio a Meio" class="lg:col-span-4 rounded-2xl bg-forno border border-stone-800 p-5 space-y-4" data-move-bound="1">
-          <span class="text-xs uppercase tracking-wider text-dourado font-semibold">2ª Metade (Direita)</span>
-          <select id="half-right-select" class="w-full rounded-xl bg-carvao border border-stone-700 px-3.5 py-2.5 text-sm text-pergaminho focus:outline-none focus:border-dourado"><option value="0">4 Queijos — R$&nbsp;82,00</option><option value="1">Frango Catupiry — R$&nbsp;78,00</option><option value="2">Portuguesa — R$&nbsp;76,00</option><option value="3">Margherita Verace — R$&nbsp;68,00</option><option value="4">Pepperoni Diavola — R$&nbsp;79,00</option><option value="5">Chocolate com Morango — R$&nbsp;74,00</option></select>
-          <p id="half-right-desc" class="text-xs text-stone-400 leading-relaxed min-h-[48px]">Peito de frango desfiado temperado com ervas finas, coberto com espiral generosa do legítimo Catupiry cremoso e azeitonas.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  nbsp;82,00</div>
+          <div class="text-2xl font-serif-it font-bold text-dourado" id="half-total-price">R$ 82,00</div>
           <button id="btn-add-half-pizza" type="button" class="w-full py-3.5 px-5 rounded-xl bg-terracota hover:bg-red-700 text-white text-sm font-semibold shadow-lg transition active:scale-95">+ Adicionar Meio a Meio ao Pedido</button>
         </div>
       </div>
