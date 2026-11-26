@@ -1556,11 +1556,9 @@
         </button>
       </div>
 
+      <div id="kitchen-orders-list" class="space-y-2 max-h-44 overflow-y-auto"></div>
       <div id="kitchen-step-buttons" class="grid grid-cols-1 gap-2"></div>
-
-      <button id="btn-kitchen-send-wa" type="button" class="w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs sm:text-sm font-bold shadow-lg transition">
-        📲 Enviar Atualização de Status no WhatsApp
-      </button>
+      <p id="kitchen-sync-note" class="text-[11px] text-stone-400">As etapas são salvas no sistema e aparecem no acompanhamento do cliente.</p>
     </div>
   </div>
 
@@ -2484,45 +2482,93 @@
       if (totVal) totVal.textContent = formatBRL(ord.total);
     }
 
-    function openKitchenPanel() {
+    function renderKitchenPanel() {
       const modal = document.getElementById('kitchen-panel-modal');
       const btnsBox = document.getElementById('kitchen-step-buttons');
       const infoEl = document.getElementById('kitchen-order-info');
       if (!modal || !btnsBox) return;
-
-      if (!APP_STATE.activeOrder) {
-        APP_STATE.activeOrder = {
-          code: 'FN-1024',
-          customer: 'Cliente Balcão',
-          mode: 'Delivery',
-          items: [],
-          total: 82,
-          createdAt: Date.now(),
-          stepIndex: 0,
-          manualStep: true
-        };
-      }
-
       const ord = APP_STATE.activeOrder;
-      if (infoEl) infoEl.textContent = `Comanda #${ord.code} • Cliente: ${ord.customer} (${ord.mode})`;
-
+      if (!ord) {
+        if (infoEl) infoEl.textContent = 'Nenhum pedido ativo selecionado.';
+        btnsBox.innerHTML = '';
+        return;
+      }
+      if (infoEl) infoEl.textContent = 'Comanda #' + ord.code + ' • ' + ord.customer + ' • ' + (ord.phone || 'Celular não informado') + ' • ' + (ord.city || '') + ' (' + ord.mode + ')';
       btnsBox.innerHTML = ORDER_STEPS.map((st, idx) => {
         const active = idx === ord.stepIndex;
-        return `
-          <button
-            type="button"
-            onclick="APP_STATE.activeOrder.stepIndex = ${idx}; APP_STATE.activeOrder.manualStep = true; saveActiveOrderState(APP_STATE.activeOrder); renderOrderTrackerUI(); openKitchenPanel();"
-            class="w-full text-left px-4 py-2.5 rounded-xl border text-xs font-semibold transition flex items-center justify-between ${active ? 'bg-dourado text-forno border-dourado font-bold' : 'bg-forno hover:bg-stone-800 text-pergaminho border-stone-700'}"
-          >
-            <span>${idx + 1}. ${st.title}</span>
-            <span>${active ? '● ATUAL' : 'Selecionar'}</span>
-          </button>
-        `;
+        return '<button type="button" onclick="updateKitchenOrderStep(' + idx + ')" class="w-full text-left px-4 py-2.5 rounded-xl border text-xs font-semibold transition flex items-center justify-between ' + (active ? 'bg-dourado text-forno border-dourado font-bold' : 'bg-forno hover:bg-stone-800 text-pergaminho border-stone-700') + '"><span>' + (idx + 1) + '. ' + st.title + '</span><span>' + (active ? '● ATUAL' : 'Selecionar') + '</span></button>';
       }).join('');
-
-      modal.classList.remove('hidden');
     }
 
+    async function openKitchenPanel() {
+      const modal = document.getElementById('kitchen-panel-modal');
+      const listBox = document.getElementById('kitchen-orders-list');
+      if (!modal || !listBox) return;
+      modal.classList.remove('hidden');
+      let pin = sessionStorage.getItem('fornoNeroKitchenPin') || '';
+      if (!pin) {
+        pin = window.prompt('Digite o PIN de acesso da cozinha:') || '';
+        if (!pin) { modal.classList.add('hidden'); return; }
+        sessionStorage.setItem('fornoNeroKitchenPin', pin);
+      }
+      listBox.innerHTML = '<p class="text-xs text-stone-400">Carregando pedidos...</p>';
+      try {
+        const response = await fetch('/api/orders', { headers: { 'x-kitchen-pin': pin } });
+        const result = await response.json();
+        if (response.status === 401) {
+          sessionStorage.removeItem('fornoNeroKitchenPin');
+          listBox.innerHTML = '<p class="text-xs text-red-300">PIN incorreto. Feche e abra o painel para tentar novamente.</p>';
+          return;
+        }
+        if (!response.ok) throw new Error(result.error || 'Não foi possível carregar os pedidos.');
+        const orders = result.orders || [];
+        listBox.innerHTML = orders.length ? orders.map(order => '<button type="button" onclick="selectKitchenOrder(\'' + order.code + '\')" class="w-full text-left p-3 rounded-xl border ' + (APP_STATE.activeOrder?.code === order.code ? 'border-dourado bg-dourado/10' : 'border-stone-700 bg-forno') + '"><span class="block text-xs font-bold text-dourado">#' + order.code + ' • ' + order.customer + '</span><span class="block text-[11px] text-stone-300">' + order.city + ' • ' + order.phone + '</span><span class="block text-[11px] text-stone-400">' + (ORDER_STEPS[order.step_index]?.title || ORDER_STEPS[0].title) + ' • ' + formatBRL(order.total) + '</span></button>').join('') : '<p class="text-xs text-stone-400 p-2">Nenhum pedido ativo no momento.</p>';
+        if (orders.length) {
+          const selected = orders.find(order => order.code === APP_STATE.activeOrder?.code) || orders[0];
+          APP_STATE.activeOrder = { ...selected, stepIndex: selected.step_index, manualStep: true };
+          saveActiveOrderState(APP_STATE.activeOrder);
+        } else { APP_STATE.activeOrder = null; }
+        renderKitchenPanel();
+      } catch (error) {
+        listBox.innerHTML = '<p class="text-xs text-red-300">' + error.message + '</p>';
+      }
+    }
+
+    async function selectKitchenOrder(code) {
+      const pin = sessionStorage.getItem('fornoNeroKitchenPin') || '';
+      try {
+        const response = await fetch('/api/orders', { headers: { 'x-kitchen-pin': pin } });
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.error || 'Falha ao carregar pedido.');
+        const selected = (result.orders || []).find(order => order.code === code);
+        if (!selected) throw new Error('Pedido não encontrado ou já concluído.');
+        APP_STATE.activeOrder = { ...selected, stepIndex: selected.step_index, manualStep: true };
+        saveActiveOrderState(APP_STATE.activeOrder);
+        await openKitchenPanel();
+      } catch (error) { showToast(error.message); }
+    }
+
+    async function updateKitchenOrderStep(stepIndex) {
+      const ord = APP_STATE.activeOrder;
+      const pin = sessionStorage.getItem('fornoNeroKitchenPin') || '';
+      if (!ord || !pin) return;
+      try {
+        const response = await fetch('/api/orders', {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json', 'x-kitchen-pin': pin },
+          body: JSON.stringify({ code: ord.code, stepIndex })
+        });
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.error || 'Não foi possível atualizar a etapa.');
+        ord.stepIndex = result.stepIndex;
+        ord.step_index = result.stepIndex;
+        ord.manualStep = true;
+        saveActiveOrderState(ord);
+        renderOrderTrackerUI();
+        await openKitchenPanel();
+        showToast('Etapa do pedido #' + ord.code + ' atualizada.');
+      } catch (error) { showToast(error.message); }
+    }
     function restoreSavedCustomerAndOrder() {
       try {
         const rawCust = localStorage.getItem('fornoNeroCustomer');
@@ -2546,21 +2592,6 @@
 
         const params = new URLSearchParams(window.location.search);
         if (params.get('cozinha') === '1') {
-          const cod = params.get('cod') || 'FN-1024';
-          const cliente = params.get('cliente') || 'Cliente';
-          const modo = params.get('modo') || 'Delivery';
-          APP_STATE.activeOrder = {
-            code: cod,
-            customer: cliente,
-            mode: modo,
-            items: APP_STATE.activeOrder?.items || [],
-            total: APP_STATE.activeOrder?.total || 0,
-            createdAt: Date.now(),
-            stepIndex: APP_STATE.activeOrder?.stepIndex || 0,
-            manualStep: true
-          };
-          saveActiveOrderState(APP_STATE.activeOrder);
-          renderOrderTrackerUI();
           openKitchenPanel();
         } else if (params.get('acompanhar') === '1') {
           const cod = params.get('cod') || 'FN-1024';
