@@ -1424,7 +1424,9 @@
         <div class="pt-4 border-t border-stone-800 space-y-3">
           <h4 class="text-xs uppercase tracking-wider text-dourado font-bold">Dados da Entrega</h4>
 
-          <input id="checkout-name" type="text" placeholder="Seu Nome *" class="w-full rounded-xl bg-forno border border-stone-700 px-3.5 py-2.5 text-sm text-pergaminho placeholder-stone-500 focus:outline-none focus:border-dourado">
+          <input id="checkout-name" type="text" placeholder="Seu Nome *" autocomplete="name" class="w-full rounded-xl bg-forno border border-stone-700 px-3.5 py-2.5 text-sm text-pergaminho placeholder-stone-500 focus:outline-none focus:border-dourado">
+          <input id="checkout-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Celular com DDD *" class="w-full rounded-xl bg-forno border border-stone-700 px-3.5 py-2.5 text-sm text-pergaminho placeholder-stone-500 focus:outline-none focus:border-dourado">
+          <input id="checkout-city" type="text" autocomplete="address-level2" placeholder="Cidade *" value="São José do Rio Pardo" class="w-full rounded-xl bg-forno border border-stone-700 px-3.5 py-2.5 text-sm text-pergaminho placeholder-stone-500 focus:outline-none focus:border-dourado">
 
           <!-- Modalidade: Delivery vs Retirada no Balcão -->
           <div class="grid grid-cols-2 gap-2">
@@ -1481,7 +1483,7 @@
         </div>
 
         <button id="btn-checkout-whatsapp" type="button" class="w-full py-3.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm shadow-lg transition active:scale-[0.98]">
-          📲 Enviar Pedido no WhatsApp
+          🍕 Finalizar Pedido
         </button>
       </div>
     </aside>
@@ -2302,13 +2304,15 @@
       `).join('');
     }
 
-    function sendOrderToWhatsApp() {
+    async function sendOrderToWhatsApp() {
       if (!APP_STATE.cart.length) {
         showToast('Adicione pelo menos uma pizza ao pedido!');
         return;
       }
 
       const name = document.getElementById('checkout-name')?.value.trim();
+      const phone = document.getElementById('checkout-phone')?.value.trim();
+      const city = document.getElementById('checkout-city')?.value.trim();
       const mode = getSelectedOrderMode();
       const street = document.getElementById('checkout-street')?.value.trim();
       const number = document.getElementById('checkout-number')?.value.trim();
@@ -2322,6 +2326,16 @@
         document.getElementById('checkout-name')?.focus();
         return;
       }
+      if (!phone || phone.replace(/\D/g, '').length < 10) {
+        showToast('Informe um celular válido com DDD.');
+        document.getElementById('checkout-phone')?.focus();
+        return;
+      }
+      if (!city) {
+        showToast('Informe sua cidade.');
+        document.getElementById('checkout-city')?.focus();
+        return;
+      }
 
       if (mode === 'Delivery' && (!street || !number || !neighborhood)) {
         showToast('Preencha Rua, Número e Bairro para entrega.');
@@ -2330,62 +2344,46 @@
 
       try {
         localStorage.setItem('fornoNeroCustomer', JSON.stringify({
-          name, street, number, neighborhood, complement, payment
+          name, phone, city, street, number, neighborhood, complement, payment
         }));
       } catch (e) {}
 
-      const orderCode = `FN-${Math.floor(1000 + Math.random() * 9000)}`;
       const subtotal = APP_STATE.cart.reduce((acc, it) => acc + it.unitPrice * it.qty, 0);
       const delivery = mode === 'Delivery' ? DELIVERY_FEE : 0;
       const total = subtotal + delivery;
+      const items = APP_STATE.cart.map((it) => ({ ...it }));
 
-      const itemsLines = APP_STATE.cart.map((it, idx) =>
-        `${idx + 1}. *${it.qty}x ${it.title}*\n   Tamanho: ${it.size} | Borda: ${it.crust} — *${formatBRL(it.unitPrice * it.qty)}*`
-      ).join('\n');
+      const submitButton = document.getElementById('btn-checkout-whatsapp');
+      if (submitButton) { submitButton.disabled = true; submitButton.textContent = 'Registrando pedido...'; }
+      let created;
+      try {
+        const response = await fetch('/api/orders', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ customer: name, phone, city, mode, street, number, neighborhood, complement, payment, notes, items, total })
+        });
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.error || 'Não foi possível registrar o pedido.');
+        created = result;
+      } catch (error) {
+        showToast(error.message || 'Falha ao registrar pedido. Tente novamente.');
+        if (submitButton) { submitButton.disabled = false; submitButton.textContent = '🍕 Finalizar Pedido'; }
+        return;
+      }
 
-      const addressBlock = mode === 'Delivery'
-        ? `\n\u{1F4CD} *ENDEREÇO DE ENTREGA*\n• Rua: ${street}, Nº ${number}\n• Bairro: ${neighborhood}${complement ? `\n• Complemento: ${complement}` : ''}\n`
-        : `\n\u{1F3EA} *RETIRADA NO BALCÃO*\n• Rua José Gonçalves Filho, 45 — Jardim Santa Teresa\n`;
-
-      const baseUrl = window.location.href.split('?')[0];
-      const kitchenLink = window.location.protocol.startsWith('http')
-        ? `\n\u{1F468}\u{200D}\u{1F373} *Painel da Cozinha:* ${baseUrl}?cozinha=1&cod=${encodeURIComponent(orderCode)}&cliente=${encodeURIComponent(name)}&modo=${encodeURIComponent(mode)}`
-        : '';
-
-      const message =
-        `\u{1F355} *NOVO PEDIDO — FORNO NERO (#${orderCode})*\n` +
-        `----------------------------------------\n` +
-        `\u{1F464} *Cliente:* ${name}\n` +
-        `\u{1F6F5} *Modalidade:* ${mode}\n` +
-        addressBlock +
-        `\n\u{1F4CB} *ITENS DO PEDIDO*\n${itemsLines}\n\n` +
-        `\u{1F4B0} *RESUMO FINANCEIRO*\n` +
-        `• Subtotal: ${formatBRL(subtotal)}\n` +
-        `• Entrega: ${mode === 'Delivery' ? formatBRL(delivery) : 'Grátis'}\n` +
-        `• *Total Final: ${formatBRL(total)}*\n` +
-        `• Pagamento: ${payment}` +
-        (notes ? `\n• Observações: ${notes}` : '') +
-        kitchenLink;
-
-      const orderObj = {
-        code: orderCode,
-        customer: name,
-        mode,
-        items: APP_STATE.cart.map((i) => ({ ...i })),
-        total,
-        createdAt: Date.now(),
-        stepIndex: 0,
-        manualStep: false
-      };
+      const orderCode = created.code;
+      const orderObj = { code: orderCode, trackingToken: created.trackingToken, customer: name, phone, city, mode, street, number, neighborhood, complement, payment, notes, items, total, createdAt: Date.parse(created.createdAt) || Date.now(), stepIndex: 0, manualStep: true };
       APP_STATE.activeOrder = orderObj;
       saveActiveOrderState(orderObj);
       renderOrderTrackerUI();
-
       document.getElementById('cart-drawer-overlay')?.classList.add('hidden');
-      // Destinatário fixo dos pedidos: WhatsApp de trabalho da pizzaria.
-      const phone = '5519997642631';
-      window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
-      showToast(`Pedido #${orderCode} enviado!`);
+      APP_STATE.cart = [];
+      saveCartToStorage();
+      renderCartUI();
+      const trackingUrl = window.location.origin + window.location.pathname + '?acompanhar=1&cod=' + encodeURIComponent(orderCode) + '&token=' + encodeURIComponent(created.trackingToken);
+      showToast('Pedido #' + orderCode + ' registrado! A cozinha já pode receber.');
+      if (submitButton) { submitButton.disabled = false; submitButton.textContent = '🍕 Finalizar Pedido'; }
+      window.history.replaceState({}, '', trackingUrl);
     }
 
     function saveActiveOrderState(order) {
@@ -2531,6 +2529,8 @@
         if (rawCust) {
           const c = JSON.parse(rawCust);
           if (c.name) document.getElementById('checkout-name').value = c.name;
+          if (c.phone) document.getElementById('checkout-phone').value = c.phone;
+          if (c.city) document.getElementById('checkout-city').value = c.city;
           if (c.street) document.getElementById('checkout-street').value = c.street;
           if (c.number) document.getElementById('checkout-number').value = c.number;
           if (c.neighborhood) document.getElementById('checkout-neighborhood').value = c.neighborhood;
