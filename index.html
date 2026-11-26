@@ -2382,7 +2382,8 @@
       renderOrderTrackerUI();
 
       document.getElementById('cart-drawer-overlay')?.classList.add('hidden');
-      const phone = (APP_STATE.whatsappNumber || '5519997642631').replace(/\D/g, '');
+      // Destinatário fixo dos pedidos: WhatsApp de trabalho da pizzaria.
+      const phone = '5519997642631';
       window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
       showToast(`Pedido #${orderCode} enviado!`);
     }
