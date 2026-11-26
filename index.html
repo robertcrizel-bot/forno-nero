@@ -377,9 +377,11 @@
     }
     @media (max-width: 767px) {
       #topo { min-height: 560px; }
+      /* No celular, mostrar o quadro inteiro do vídeo: sem recorte/zoom de object-cover. */
       #hero-bg-video {
-        object-position: 58% center;
-        filter: brightness(1.2) contrast(1.08) saturate(1.14);
+        object-fit: contain !important;
+        object-position: center center !important;
+        filter: brightness(1.08) contrast(1.04) saturate(1.05);
       }
       #topo [data-studio-box="Bloco Texto Capa"] {
         max-width: 34rem;
