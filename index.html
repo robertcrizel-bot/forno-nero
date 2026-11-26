@@ -369,8 +369,8 @@
 
   <style id="mobile-navigation-and-drinks">
     @media (max-width: 767px) {
-      /* Reserva espaço para cabeçalho, faixa de horário e navegação fixa. */
-      #topo { padding-top: 12rem !important; }
+      /* Mantém o título logo abaixo da navegação fixa, sem o vazio do selo removido. */
+      #topo { padding-top: 7.5rem !important; }
 
       /* Faixa de horários em duas linhas no celular: nada de cortar o texto. */
       [data-studio-box="Faixa Horário Funcionamento"] > div {
@@ -543,10 +543,6 @@
 
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div data-studio-box="Bloco Texto Capa" class="max-w-2xl space-y-5" data-move-bound="1">
-        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-forno/80 backdrop-blur-md border border-dourado/40 text-xs text-dourado font-semibold">
-          
-        </div>
-
         <h1 id="hero-title-text" class="font-serif-it text-4xl sm:text-6xl font-bold text-pergaminho leading-[1.08] drop-shadow-lg">
           A verdadeira arte napolitana, <span class="italic text-dourado">assada na brasa</span> e entregue na sua mesa.
         </h1>
