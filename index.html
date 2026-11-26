@@ -2377,7 +2377,7 @@
       document.getElementById('cart-drawer-overlay')?.classList.add('hidden');
       APP_STATE.cart = [];
       saveCartToStorage();
-      renderCartUI();
+      renderCartDrawer();
       const trackingUrl = window.location.origin + window.location.pathname + '?acompanhar=1&cod=' + encodeURIComponent(orderCode) + '&token=' + encodeURIComponent(created.trackingToken);
       showToast('Pedido #' + orderCode + ' registrado! A cozinha já pode receber.');
       if (submitButton) { submitButton.disabled = false; submitButton.textContent = '🍕 Finalizar Pedido'; }
