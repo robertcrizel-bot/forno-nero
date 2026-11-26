@@ -451,7 +451,8 @@
 
   <style id="desktop-hero-original-visual">
     @media (min-width: 768px) {
-      #topo { min-height: 590px !important; }
+      /* Deixa a capa abaixo do cabeçalho e da faixa fixa de horários. */
+      #topo { margin-top: 100px !important; min-height: 590px !important; }
       #hero-bg-video {
         filter: brightness(1.16) contrast(1.07) saturate(1.12);
         object-position: center center;
@@ -564,8 +565,8 @@
 
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div data-studio-box="Bloco Texto Capa" class="max-w-2xl space-y-5" data-move-bound="1">
-        <h1 id="hero-title-text" class="font-serif-it text-3xl sm:text-6xl font-bold text-pergaminho leading-[1.08] drop-shadow-lg">
-          A verdadeira arte napolitana, <span class="hero-highlight italic font-bold text-dourado">assada na brasa</span> e entregue na sua mesa.
+        <h1 id="hero-title-text" class="font-serif-it text-3xl sm:text-6xl font-normal text-pergaminho leading-[1.08] drop-shadow-lg">
+          A verdadeira arte napolitana, <span class="hero-highlight font-bold text-dourado">assada na brasa</span> e entregue na sua mesa.
         </h1>
 
         <div data-studio-box="Botões Ação Hero" class="flex flex-wrap items-center gap-3 pt-2" data-move-bound="1">
