@@ -400,7 +400,10 @@
 
       /* Botões: descem mais 24px; total de 36px abaixo da posição original. */
       #topo [data-studio-box="Botões Ação Hero"] {
-        width: 100% !important;
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        justify-content: space-between !important;
+        width: 125% !important;
         transform: scale(0.8) translateY(45px);
         transform-origin: top left;
       }
@@ -408,7 +411,7 @@
         font-size: 14px !important;
       }
       #topo [data-studio-box="Botões Ação Hero"] a:nth-child(2) {
-        margin-left: auto !important;
+        margin-left: 0 !important;
       }
     }
   </style>
