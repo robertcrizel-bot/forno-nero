@@ -272,6 +272,20 @@
         scroll-margin-top: 40px;
       }
     }
+
+    /* No mobile, mantém o início das seções abaixo das barras fixas. */
+    @media (max-width: 767px) {
+      html { scroll-padding-top: 160px; }
+      #nossas-pizzas,
+      #meio-a-meio,
+      #il-menu,
+      #la-tradizione,
+      #contato,
+      #secao-bebidas,
+      #avaliacoes-google {
+        scroll-margin-top: 160px;
+      }
+    }
   </style>
 
   <style id="mobile-layout-fixes">
