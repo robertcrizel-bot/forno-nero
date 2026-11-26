@@ -451,12 +451,28 @@
 
   <style id="desktop-hero-original-visual">
     @media (min-width: 768px) {
-      /* Deixa a capa abaixo do cabeçalho e da faixa fixa de horários. */
+      /* Vídeo inteiro e nítido no centro; laterais preenchidas pela cópia desfocada. */
       #topo { margin-top: 98px !important; min-height: 590px !important; }
+      #hero-bg-video-backdrop {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: blur(26px) brightness(0.62);
+        transform: scale(1.08);
+        opacity: 0.9;
+        pointer-events: none;
+      }
       #hero-bg-video {
-        filter: brightness(1.16) contrast(1.07) saturate(1.12);
-        object-position: center center;
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
         object-fit: contain !important;
+        object-position: center center;
+        filter: brightness(1.16) contrast(1.07) saturate(1.12);
       }
       #topo [data-studio-box="Bloco Texto Capa"] { max-width: 42rem; }
     }
@@ -3589,4 +3605,39 @@
     top: -104px;
   }
 </style>
+<script id="desktop-hero-video-backdrop-sync">
+(() => {
+  const main = document.getElementById('hero-bg-video');
+  if (!main) return;
+  const backdrop = main.cloneNode(false);
+  backdrop.removeAttribute('id');
+  backdrop.id = 'hero-bg-video-backdrop';
+  backdrop.setAttribute('aria-hidden', 'true');
+  backdrop.muted = true;
+  backdrop.autoplay = true;
+  backdrop.loop = true;
+  backdrop.playsInline = true;
+  main.parentElement.insertBefore(backdrop, main);
+
+  const syncSource = () => {
+    const src = main.currentSrc || main.src;
+    if (src && backdrop.src !== src) {
+      backdrop.src = src;
+      backdrop.load();
+    }
+    backdrop.play().catch(() => {});
+  };
+  main.addEventListener('loadstart', syncSource);
+  main.addEventListener('loadedmetadata', () => {
+    try { backdrop.currentTime = main.currentTime || 0; } catch (_) {}
+    backdrop.play().catch(() => {});
+  });
+  main.addEventListener('timeupdate', () => {
+    if (Math.abs((backdrop.currentTime || 0) - (main.currentTime || 0)) > 0.45) {
+      try { backdrop.currentTime = main.currentTime; } catch (_) {}
+    }
+  });
+  syncSource();
+})();
+</script>
 </body></html>
